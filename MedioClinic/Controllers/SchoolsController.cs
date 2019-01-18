@@ -42,8 +42,8 @@ namespace MedioClinic.Controllers
 
             var model = GetPageViewModel(new SchoolsViewModel()
             {
-                Doctors = SchoolRepository.GetDoctors(),
-                DoctorSection = SchoolSection
+                Schools = SchoolRepository.GetSchools(),
+                SchoolSection = schoolSection
             }, schoolSection.Header);
 
             return View(model);
@@ -52,7 +52,7 @@ namespace MedioClinic.Controllers
         [OutputCache(Duration = 3600, VaryByParam = "nodeGuid", Location = OutputCacheLocation.Server)]
         public ActionResult Detail(Guid nodeGuid, string nodeAlias)
         {
-            var doctor = SchoolRepository.GetSchool(nodeGuid);
+            var school = SchoolRepository.GetSchool(nodeGuid);
 
             if (school == null)
             {
@@ -60,7 +60,7 @@ namespace MedioClinic.Controllers
             }
 
             // Sets cache dependency on single page based on NodeGUID
-            // System clears the cache when given doctor is deleted or edited in Kentico
+            // System clears the cache when given school is deleted or edited in Kentico
             Dependencies.CacheService.SetOutputCacheDependency(nodeGuid);
 
             var model = GetPageViewModel(new SchoolDetailViewModel()

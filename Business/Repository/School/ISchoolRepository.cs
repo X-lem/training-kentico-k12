@@ -6,7 +6,7 @@ namespace Business.Repository.School
 {
     public interface ISchoolRepository : IRepository
     {
-        IEnumerable<SchoolDto> GetSChools();
+        IEnumerable<SchoolDto> GetSchools();
         SchoolDto GetSchool(Guid nodeGuid);
     }
 }

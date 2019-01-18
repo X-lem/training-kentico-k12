@@ -38,6 +38,7 @@ namespace MedioClinic
                 constraints: new { culture = new SiteCultureConstraint(AppConfig.Sitename), nodeGuid = new GuidRouteConstraint(), nodeAlias = new OptionalRouteConstraint(new AlphaRouteConstraint()) }
             );
 
+            // Maps route to school detail
             route = routes.MapRoute(
                 name: "SchoolWithAlias",
                 url: "{culture}/School/Detail/{nodeGuid}/{nodeAlias}",

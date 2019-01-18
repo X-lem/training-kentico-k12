@@ -48,7 +48,7 @@ namespace Business.Repository.School
                 .Select(SchoolDtoSelect);
         }
 
-        public SchoolDto GetSChool(Guid nodeGuid)
+        public SchoolDto GetSchool(Guid nodeGuid)
         {
             return DocumentQueryService.GetDocument<CMS.DocumentEngine.Types.MedioClinic.School>(nodeGuid)
                 .AddColumns(_schoolColumns)
