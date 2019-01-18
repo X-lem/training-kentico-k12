@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using Business.Dto.Schools;
 
-namespace MedioClinic.Models.Doctors
+namespace MedioClinic.Models.Schools
 {
     public class SchoolsViewModel : IViewModel
     {
-        public SchoolSectionDto DoctorSection { get; set; }
-        public IEnumerable<SchoolDto> Doctors { get; set; }
+        public SchoolSectionDto SchoolSection { get; set; }
+        public IEnumerable<SchoolDto> Schools { get; set; }
     }
 }

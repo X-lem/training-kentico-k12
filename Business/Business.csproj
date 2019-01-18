@@ -457,6 +457,8 @@
     <Compile Include="Dto\MediaLibrary\MediaLibraryFileDto.cs" />
     <Compile Include="Dto\Menu\MenuItemDto.cs" />
     <Compile Include="Dto\Page\PageMetadataDto.cs" />
+    <Compile Include="Dto\Schools\SchoolDto.cs" />
+    <Compile Include="Dto\Schools\SchoolSectionDto.cs" />
     <Compile Include="Dto\Social\SocialLinkDto.cs" />
     <Compile Include="Generated\Pages\Company.generated.cs" />
     <Compile Include="Generated\Pages\CompanyProvider.generated.cs" />
@@ -503,6 +505,10 @@
     <Compile Include="Repository\Map\MapRepository.cs" />
     <Compile Include="Repository\Menu\IMenuRepository.cs" />
     <Compile Include="Repository\Menu\MenuRepository.cs" />
+    <Compile Include="Repository\School\ISchoolRepository.cs" />
+    <Compile Include="Repository\School\ISchoolSectionRepository.cs" />
+    <Compile Include="Repository\School\SchoolRepository.cs" />
+    <Compile Include="Repository\School\SchoolSectionRepository.cs" />
     <Compile Include="Repository\Social\ISocialLinkRepository.cs" />
     <Compile Include="Repository\Social\SocialLinkRepository.cs" />
     <Compile Include="Services\Cache\CacheDependencyType.cs" />

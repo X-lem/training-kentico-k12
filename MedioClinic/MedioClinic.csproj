@@ -690,7 +690,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\Schools\" />
     <Folder Include="Views\Schools\" />
   </ItemGroup>
   <ItemGroup>
@@ -723,6 +722,7 @@
     <Compile Include="Controllers\DoctorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NotFoundController.cs" />
+    <Compile Include="Controllers\SchoolsController.cs" />
     <Compile Include="Extensions\LocalizationExtensions.cs" />
     <Compile Include="Extensions\UrlExtensions.cs" />
     <Compile Include="Global.asax.cs">
@@ -735,6 +735,8 @@
     <Compile Include="Models\IViewModel.cs" />
     <Compile Include="Models\KenticoSizeConstraints.cs" />
     <Compile Include="Models\PageViewModel.cs" />
+    <Compile Include="Models\Schools\SchoolDetailViewModel.cs" />
+    <Compile Include="Models\Schools\SchoolsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\MultiCultureMvcRouteHandler.cs" />
     <Compile Include="Utils\SiteContextService.cs" />

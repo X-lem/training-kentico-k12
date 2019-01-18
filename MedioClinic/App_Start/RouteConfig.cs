@@ -38,6 +38,13 @@ namespace MedioClinic
                 constraints: new { culture = new SiteCultureConstraint(AppConfig.Sitename), nodeGuid = new GuidRouteConstraint(), nodeAlias = new OptionalRouteConstraint(new AlphaRouteConstraint()) }
             );
 
+            route = routes.MapRoute(
+                name: "SchoolWithAlias",
+                url: "{culture}/School/Detail/{nodeGuid}/{nodeAlias}",
+                defaults: new { action = "Detail", controller = "Schools", culture = defaultCulture.Name, nodeGuid = string.Empty, nodeAlias = "" },
+                constraints: new { culture = new SiteCultureConstraint(AppConfig.Sitename), nodeGuid = new GuidRouteConstraint(), nodeAlias = new OptionalRouteConstraint(new AlphaRouteConstraint()) }
+            );
+
             // A route value determines the culture of the current thread
             route.RouteHandler = new MultiCultureMvcRouteHandler();
 
