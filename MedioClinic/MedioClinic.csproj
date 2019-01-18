@@ -689,7 +689,10 @@
       <Private>True</Private>
     </Reference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Models\Schools\" />
+    <Folder Include="Views\Schools\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Css\Master\icon.css" />
     <Content Include="Content\Css\Master\materialize.min.css" />
