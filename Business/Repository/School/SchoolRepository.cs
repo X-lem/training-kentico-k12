@@ -14,8 +14,8 @@ namespace Business.Repository.School
         {
             // Defines database columns for retrieving data
             // NodeGuid is retrieved automatically
-            "NodeID", "NodeAlias", "Name", "Street", "City", "Country",
-            "ZipCode", "PhotoNumber", "Bio", "Photo",
+            "NodeID", "NodeAlias", "SchoolName", "Street", "City", "State", "Country",
+            "ZipCode", "PhoneNumber", "Bio", "Photo",
         };
 
         private Func<CMS.DocumentEngine.Types.MedioClinic.School, SchoolDto> SchoolDtoSelect => school => new SchoolDto()
@@ -23,9 +23,10 @@ namespace Business.Repository.School
             NodeAlias = school.NodeAlias,
             NodeGuid = school.NodeGUID,
             NodeId = school.NodeID,
-            Name = school.Name,
+            SchoolName = school.SchoolName,
             Street = school.Street,
             City = school.City,
+            State = school.State,
             Country = school.Country,
             ZipCode = school.ZipCode,
             PhoneNumber = school.PhoneNumber,

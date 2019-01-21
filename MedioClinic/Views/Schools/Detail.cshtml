@@ -1,17 +1,37 @@
-﻿@{
-    Layout = null;
-}
+﻿@using MedioClinic.Models.Schools
 
-<!DOCTYPE html>
+@model MedioClinic.Models.PageViewModel<SchoolDetailViewModel>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-</head>
-<body>
-    <div>
-    
+@if (Model.Data.School != null)
+{
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="kn-doctor-profile">
+                    <div class="col m12 s12">
+                        <img src="@Url.KenticoImageUrl(Model.Data.School.Photo.GetPath())" alt="Schools's photo" />
+                    </div>
+                    <div class="col l8 m6 s12">
+                        <div class="kn-doctor-profile-box">
+                            <div class="kn-doctor-profile-header">
+                                <h4>@Model.Data.School.SchoolName</h4>
+                            </div>
+                            <div class="kn-doctor-profile-bio">
+                                <h5>Biograpy</h5>
+                                <p>
+                                    @Html.Raw(Model.Data.School.Bio)
+                                </p>
+                            </div>
+                            <div class="kn-doctor-profile-degree">
+                                <div class="">
+                                    <strong>Address:&nbsp;</strong>@Model.Data.School.FullAddress<br>
+                                    <strong>Phone:&nbsp;</strong>@Model.Data.School.PhoneNumber
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</body>
-</html>
+}

@@ -66,7 +66,7 @@ namespace MedioClinic.Controllers
             var model = GetPageViewModel(new SchoolDetailViewModel()
             {
                 School = school
-            }, school.Name);
+            }, school.SchoolName);
 
             return View(model);
         }

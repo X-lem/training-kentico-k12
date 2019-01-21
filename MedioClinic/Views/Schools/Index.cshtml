@@ -1,17 +1,48 @@
-﻿@{
-    Layout = null;
-}
+﻿@using MedioClinic.Models.Schools
 
-<!DOCTYPE html>
+@model MedioClinic.Models.PageViewModel<SchoolsViewModel>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-</head>
-<body>
-    <div>
-    
+<div class="section kn-section-top">
+    <div class="container">
+        <!-- School header section-->
+        <div class="row">
+            <h1 class="header col s12">@(Model.Data.SchoolSection?.Header)</h1>
+        </div>
     </div>
-</body>
-</html>
+</div>
+
+
+<!--   Schools Section   -->
+
+@if (Model.Data.Schools != null)
+{
+    <div class="section">
+        <div class="container">
+            <div class="row">
+
+                @foreach (var school in Model.Data.Schools)
+                {
+                    <div class="col m12 s12 card">
+                        <div class="card-image">
+                            <img src="@Url.KenticoImageUrl(school.Photo.GetPath())" alt="@school.SchoolName">
+                        </div>
+                        <div class="card-title kn-margin-m kn-padding-m truncate">
+                            <a href="@Url.Action("Detail", "Schools", new { nodeGuid = school.NodeGuid, nodeAlias = school.NodeAlias })">@school.SchoolName</a>
+                        </div>
+                        <div class="card-content kn-doctor-card-content">
+                            <p>
+                                @Html.Raw(school.Bio)
+                            </p>
+                        </div>
+                        <div class="card-content">
+                            @school.GeneralAddress
+                        </div>
+                        <div class="card-action">
+                            <a href="@Url.Action("Detail", "Schools", new { nodeGuid = school.NodeGuid, nodeAlias = school.NodeAlias })">See more</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}

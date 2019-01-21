@@ -480,6 +480,10 @@
     <Compile Include="Generated\Pages\MenuContainerProvider.generated.cs" />
     <Compile Include="Generated\Pages\OfficeLocationFolder.generated.cs" />
     <Compile Include="Generated\Pages\OfficeLocationFolderProvider.generated.cs" />
+    <Compile Include="Generated\Pages\School.generated.cs" />
+    <Compile Include="Generated\Pages\SchoolProvider.generated.cs" />
+    <Compile Include="Generated\Pages\SchoolSection.generated.cs" />
+    <Compile Include="Generated\Pages\SchoolSectionProvider.generated.cs" />
     <Compile Include="Generated\Pages\SocialLink.generated.cs" />
     <Compile Include="Generated\Pages\SocialLinkProvider.generated.cs" />
     <Compile Include="Generated\Pages\SocialLinksFolder.generated.cs" />
