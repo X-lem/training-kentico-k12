@@ -1,8 +1,11 @@
+using System;
 using System.Globalization;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Routing.Constraints;
 using System.Web.Routing;
-
+using System.Web.UI.WebControls;
+using CMS.DocumentEngine;
 using Kentico.Web.Mvc;
 using MedioClinic.Config;
 using MedioClinic.Utils;
@@ -46,6 +49,13 @@ namespace MedioClinic
                 constraints: new { culture = new SiteCultureConstraint(AppConfig.Sitename), nodeGuid = new GuidRouteConstraint(), nodeAlias = new OptionalRouteConstraint(new AlphaRouteConstraint()) }
             );
 
+            route = routes.MapRoute(
+                name: "BasicSections",
+                url: "{culture}/{nodeName}",
+                defaults: new { action = "Index", controller = "BasicSection", culture = defaultCulture.Name, nodeGuid = string.Empty, nodeAlias = "" },
+                constraints: new { culture = new SiteCultureConstraint(AppConfig.Sitename), nodeGuid = new GuidRouteConstraint(), nodeAlias = new OptionalRouteConstraint(new AlphaRouteConstraint()) }
+            );
+
             // A route value determines the culture of the current thread
             route.RouteHandler = new MultiCultureMvcRouteHandler();
 
@@ -59,6 +69,11 @@ namespace MedioClinic
 
             // A route value determines the culture of the current thread
             route.RouteHandler = new MultiCultureMvcRouteHandler();
+        }
+
+        private static void HttpNotFound()
+        {
+            throw new NotImplementedException();
         }
     }
 }

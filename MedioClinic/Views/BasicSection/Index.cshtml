@@ -1,0 +1,22 @@
+﻿@using Kentico.PageBuilder.Web.Mvc
+@using Kentico.Web.Mvc
+
+@{
+    Layout = "";
+}
+<!DOCTYPE html>
+
+<html>
+<head id="head">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8" />
+    @Html.Kentico().PageBuilderStyles()
+</head>
+<body>
+    <div class="container content-wrapper">
+        @Html.Kentico().EditableArea("main")
+    </div>
+
+    @Html.Kentico().PageBuilderScripts()
+</body>
+</html>

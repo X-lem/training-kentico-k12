@@ -460,6 +460,8 @@
     <Compile Include="Dto\Schools\SchoolDto.cs" />
     <Compile Include="Dto\Schools\SchoolSectionDto.cs" />
     <Compile Include="Dto\Social\SocialLinkDto.cs" />
+    <Compile Include="Generated\Pages\BasicSection.generated.cs" />
+    <Compile Include="Generated\Pages\BasicSectionProvider.generated.cs" />
     <Compile Include="Generated\Pages\Company.generated.cs" />
     <Compile Include="Generated\Pages\CompanyProvider.generated.cs" />
     <Compile Include="Generated\Pages\CompanyService.generated.cs" />
@@ -504,6 +506,7 @@
     <Compile Include="Repository\Doctor\IDoctorSectionRepository.cs" />
     <Compile Include="Repository\Home\HomeSectionRepository.cs" />
     <Compile Include="Repository\Home\IHomeSectionRepository.cs" />
+    <Compile Include="Repository\BasicSection\IBasicSectionRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\Map\IMapRepository.cs" />
     <Compile Include="Repository\Map\MapRepository.cs" />

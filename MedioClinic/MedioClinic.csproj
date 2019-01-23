@@ -689,7 +689,10 @@
       <Private>True</Private>
     </Reference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Controllers\Sections\" />
+    <Folder Include="Views\Shared\Widgets\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Css\Master\icon.css" />
     <Content Include="Content\Css\Master\materialize.min.css" />
@@ -721,6 +724,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NotFoundController.cs" />
     <Compile Include="Controllers\SchoolsController.cs" />
+    <Compile Include="Controllers\BasicSectionController.cs" />
     <Compile Include="Extensions\LocalizationExtensions.cs" />
     <Compile Include="Extensions\UrlExtensions.cs" />
     <Compile Include="Global.asax.cs">
@@ -755,6 +759,8 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Schools\Detail.cshtml" />
     <Content Include="Views\Schools\Index.cshtml" />
+    <Content Include="Views\Shared\Sections\_BasicSection.cshtml" />
+    <Content Include="Views\BasicSection\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Business\Business.csproj">
