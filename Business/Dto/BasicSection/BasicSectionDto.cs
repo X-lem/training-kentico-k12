@@ -1,7 +1,12 @@
-﻿namespace Business.Dto.BasicSection
+﻿using System;
+
+namespace Business.Dto.BasicSection
 {
-    class BasicSectionDto : IDto
+    public class BasicSectionDto
     {
-        public string Header { get; set; }
+        public int NodeId { get; set; }
+        public Guid NodeGuid { get; set; }
+        public string NodeAlias { get; set; }
+        public string BasicSectionName { get; set; }
     }
 }

@@ -2,29 +2,38 @@
 using System.Web.Mvc;
 using Kentico.Web.Mvc;
 using Business.Repository.BasicSection;
+using MedioClinic.Controllers;
+using Business.DependencyInjection;
 
 
 //[assembly: RegisterSection("LearningKit.Sections.BasicSection", typeof(BasicSectionController), "Basic Section",
 //  Description = "A section with two widget zones displayed at 70/30. A main and callout widget zone")]
-public class BasicSectionController : Controller
+namespace MedioClinic.Controllers
 {
-    private readonly IBasicSectionRepository mRepository;
-
-    public BasicSectionController(IBasicSectionRepository repository)
+    public class BasicSectionController : BaseController
     {
-        mRepository = repository;
-    }
+        private IBasicSectionRepository BasicSectionRepository { get; }
 
-    // GET: BasicSection
-    public ActionResult Index(string pageAlias)
-    {
-        var basicSection = mRepository.GetBasicSection(pageAlias);
-        if (basicSection == null)
+        public BasicSectionController(
+            IBusinessDependencies dependencies,
+            IBasicSectionRepository basicSectionRepository
+            ) : base(dependencies)
         {
-            return HttpNotFound();
+            BasicSectionRepository = BasicSectionRepository;
         }
-        HttpContext.Kentico().PageBuilder().Initialize(basicSection.DocumentID);
 
-        return View();
+        // GET: BasicSection
+        public ActionResult Index(string pageAlias)
+        {
+            var basicSection = BasicSectionRepository.GetBasicSection(pageAlias);
+            if (basicSection == null)
+            {
+                return HttpNotFound();
+            }
+
+            HttpContext.Kentico().PageBuilder().Initialize(basicSection.DocumentID);
+
+            return View();
+        }
     }
 }

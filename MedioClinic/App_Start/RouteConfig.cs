@@ -51,9 +51,9 @@ namespace MedioClinic
 
             route = routes.MapRoute(
                 name: "BasicSections",
-                url: "{culture}/{nodeName}",
-                defaults: new { action = "Index", controller = "BasicSection", culture = defaultCulture.Name, nodeGuid = string.Empty, nodeAlias = "" },
-                constraints: new { culture = new SiteCultureConstraint(AppConfig.Sitename), nodeGuid = new GuidRouteConstraint(), nodeAlias = new OptionalRouteConstraint(new AlphaRouteConstraint()) }
+                url: "{culture}/BasicSections/{nodeAlias}"
+            //defaults: new { action = "Index", controller = "BasicSection", culture = defaultCulture.Name, nodeGuid = string.Empty, nodeAlias = "" },
+            //constraints: new { culture = new SiteCultureConstraint(AppConfig.Sitename), nodeGuid = new GuidRouteConstraint(), nodeAlias = new OptionalRouteConstraint(new AlphaRouteConstraint()) }
             );
 
             // A route value determines the culture of the current thread
