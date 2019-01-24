@@ -50,8 +50,8 @@ namespace MedioClinic
             );
 
             route = routes.MapRoute(
-                name: "BasicSections",
-                url: "{culture}/BasicSections/{nodeAlias}"
+                name: "BasicSection",
+                url: "{culture}/{nodeAlias}"
             //defaults: new { action = "Index", controller = "BasicSection", culture = defaultCulture.Name, nodeGuid = string.Empty, nodeAlias = "" },
             //constraints: new { culture = new SiteCultureConstraint(AppConfig.Sitename), nodeGuid = new GuidRouteConstraint(), nodeAlias = new OptionalRouteConstraint(new AlphaRouteConstraint()) }
             );
