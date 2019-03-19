@@ -5,9 +5,9 @@ using CMS.DocumentEngine.Types.MedioClinic;
 
 namespace Business.Repository.BasicSection
 {
-   public interface IBasicSectionRepository : IRepository
+    public interface IBasicSectionRepository : IRepository
     {
         BasicSectionDto GetBasicSection(Guid nodeGuid);
-        CMS.DocumentEngine.Types.MedioClinic.BasicSection GetBasicSection(string pageAlias);
+        //CMS.DocumentEngine.Types.MedioClinic.BasicSection GetBasicSection(string pageAlias);
     }
 }

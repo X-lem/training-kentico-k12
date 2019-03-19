@@ -683,3 +683,9 @@ span.kn-badge.closed {
             cursor: pointer;
             display: block;
         }
+
+
+/* LANDING PAGE STYLES */
+.kn-system-messages p {
+    padding: 0.5rem;
+}

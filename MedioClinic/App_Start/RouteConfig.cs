@@ -49,11 +49,12 @@ namespace MedioClinic
                 constraints: new { culture = new SiteCultureConstraint(AppConfig.Sitename), nodeGuid = new GuidRouteConstraint(), nodeAlias = new OptionalRouteConstraint(new AlphaRouteConstraint()) }
             );
 
+            // Maps route to langind pages
             route = routes.MapRoute(
-                name: "BasicSection",
-                url: "{culture}/{nodeAlias}"
-            //defaults: new { action = "Index", controller = "BasicSection", culture = defaultCulture.Name, nodeGuid = string.Empty, nodeAlias = "" },
-            //constraints: new { culture = new SiteCultureConstraint(AppConfig.Sitename), nodeGuid = new GuidRouteConstraint(), nodeAlias = new OptionalRouteConstraint(new AlphaRouteConstraint()) }
+                name: "LandingPage",
+                url: "{culture}/LandingPage/{nodeAlias}",
+                defaults: new { culture = defaultCulture.Name, controller = "LandingPage", action = "Index" },
+                constraints: new { culture = new SiteCultureConstraint(AppConfig.Sitename), nodeAlias = new OptionalRouteConstraint(new RegexRouteConstraint(@"[\w\d_-]*")) }
             );
 
             // A route value determines the culture of the current thread

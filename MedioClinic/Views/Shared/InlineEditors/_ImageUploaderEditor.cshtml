@@ -1,0 +1,32 @@
+﻿@using MedioClinic.Models.InlineEditors
+@model ImageUploaderEditorViewModel
+
+@{
+    string GetContainerClass() =>
+        Model.Image != null ? "kn-image-uploader-container" : "kn-image-uploader-empty-container";
+
+    // Gets the URL to the ImageUploaderController's action.
+    HtmlString GetActionUrl()
+    {
+        return Url.Kentico().AuthenticateUrl(Url.Action("Upload", "ImageUploader", new
+        {
+            pageId = Context.Kentico().PageBuilder().PageIdentifier
+        }), false);
+    }
+}
+
+@using (Html.Kentico().BeginInlineEditor("image-uploader-editor", Model.PropertyName,
+    new
+    {
+        @class = "kn-image-uploader-editor",
+        data_upload_url = GetActionUrl().ToString()
+    }))
+{
+    <div class="@GetContainerClass()">
+        <div class="dz-uploader">
+            <div class="dz-message top">
+                @Html.Raw("Drop image here or <a class="dz - clickable">click</a> to browse")
+            </div>
+        </div>
+    </div>
+}

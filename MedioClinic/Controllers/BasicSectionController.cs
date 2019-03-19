@@ -4,6 +4,8 @@ using Kentico.Web.Mvc;
 using Business.Repository.BasicSection;
 using MedioClinic.Controllers;
 using Business.DependencyInjection;
+using System;
+using MedioClinic.Models.BasicSection;
 
 
 //[assembly: RegisterSection("LearningKit.Sections.BasicSection", typeof(BasicSectionController), "Basic Section",
@@ -12,6 +14,7 @@ namespace MedioClinic.Controllers
 {
     public class BasicSectionController : BaseController
     {
+
         private IBasicSectionRepository BasicSectionRepository { get; }
 
         public BasicSectionController(
@@ -19,21 +22,26 @@ namespace MedioClinic.Controllers
             IBasicSectionRepository basicSectionRepository
             ) : base(dependencies)
         {
-            BasicSectionRepository = BasicSectionRepository;
+            BasicSectionRepository = basicSectionRepository;
         }
 
         // GET: BasicSection
-        public ActionResult Index(string pageAlias)
+        public ActionResult Detail(Guid nodeGuid, string nodeAlias)
         {
-            var basicSection = BasicSectionRepository.GetBasicSection(pageAlias);
+            var basicSection = BasicSectionRepository.GetBasicSection(nodeGuid);
             if (basicSection == null)
             {
                 return HttpNotFound();
             }
 
-            HttpContext.Kentico().PageBuilder().Initialize(basicSection.DocumentID);
+            var model = GetPageViewModel(new BasicSectionViewModel()
+            {
+                BasicSection = basicSection
+            }, basicSection.BasicSectionName);
 
-            return View();
+            //HttpContext.Kentico().PageBuilder().Initialize(basicSection.DocumentID);
+
+            return View(model);
         }
     }
 }
