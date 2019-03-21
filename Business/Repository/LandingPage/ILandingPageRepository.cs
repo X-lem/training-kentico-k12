@@ -1,6 +1,9 @@
-﻿using Business.Repository;
+﻿using Business.Dto.LandingPage;
 
-public interface ILandingPageRepository : IRepository
+namespace Business.Repository.LandingPage
 {
-    LandingPageDto GetLandingPage(string pageAlias);
+    public interface ILandingPageRepository : IRepository
+    {
+        LandingPageDto GetLandingPage(string pageAlias);
+    }
 }

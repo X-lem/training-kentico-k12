@@ -1,31 +1,39 @@
-﻿using Business.DependencyInjection;
-using MedioClinic.Controllers;
-using System;
+﻿using System;
 using System.Web.Mvc;
+using System.Web.UI;
 
-public class LandingPageController : BaseController
+using Business.DependencyInjection;
+using Business.Repository.LandingPage;
+using Kentico.PageBuilder.Web.Mvc;
+using Kentico.Web.Mvc;
+
+namespace MedioClinic.Controllers
 {
-    protected ILandingPageRepository LandingPageRepository { get; }
-
-    public LandingPageController(
-        IBusinessDependencies dependencies, ILandingPageRepository landingPageRepository) : base(dependencies)
+    public class LandingPageController : BaseController
     {
-        LandingPageRepository = landingPageRepository ?? throw new ArgumentNullException(nameof(landingPageRepository));
-    }
+        protected ILandingPageRepository LandingPageRepository { get; }
 
-    // GET: LandingPage/[nodeAlias]
-    public ActionResult Index(string nodeAlias)
-    {
-        var landingPageDto = LandingPageRepository.GetLandingPage(nodeAlias);
-
-        if (landingPageDto == null)
+        public LandingPageController(
+            IBusinessDependencies dependencies, ILandingPageRepository landingPageRepository) : base(dependencies)
         {
-            return HttpNotFound();
+            LandingPageRepository = landingPageRepository ?? throw new ArgumentNullException(nameof(landingPageRepository));
         }
 
-        var model = GetPageViewModel(landingPageDto.Title);
-        HttpContext.Kentico().PageBuilder().Initialize(landingPageDto.DocumentId);
+        // GET: LandingPage/[nodeAlias]
+        [OutputCache(Duration = 3600, VaryByParam = "nodeAlias", Location = OutputCacheLocation.Server)]
+        public ActionResult Index(string nodeAlias)
+        {
+            var landingPageDto = LandingPageRepository.GetLandingPage(nodeAlias);
 
-        return View(model);
+            if (landingPageDto == null)
+            {
+                return HttpNotFound();
+            }
+
+            var model = GetPageViewModel(landingPageDto.Title);
+            HttpContext.Kentico().PageBuilder().Initialize(landingPageDto.DocumentId);
+
+            return View(model);
+        }
     }
 }
