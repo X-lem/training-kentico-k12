@@ -20,6 +20,12 @@ namespace Business.Services.Query
                 .WhereEquals("NodeGUID", nodeGuid);
 
         }
+        public DocumentQuery<TDocument> GetDocument<TDocument>(string pageAlias) where TDocument : TreeNode, new()
+        {
+            return GetDocuments<TDocument>()
+                .TopN(1)
+                .WhereEquals("NodeAlias", pageAlias);
+        }
 
         public DocumentQuery<TDocument> GetDocuments<TDocument>() where TDocument : TreeNode, new()
         {
