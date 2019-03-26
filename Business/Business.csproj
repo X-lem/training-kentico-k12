@@ -476,6 +476,10 @@
     <Compile Include="Generated\Pages\DoctorSectionProvider.generated.cs" />
     <Compile Include="Generated\Pages\HomeSection.generated.cs" />
     <Compile Include="Generated\Pages\HomeSectionProvider.generated.cs" />
+    <Compile Include="Generated\Pages\LandingPage.generated.cs" />
+    <Compile Include="Generated\Pages\LandingPageProvider.generated.cs" />
+    <Compile Include="Generated\Pages\LandingPageSection.generated.cs" />
+    <Compile Include="Generated\Pages\LandingPageSectionProvider.generated.cs" />
     <Compile Include="Generated\Pages\MapLocation.generated.cs" />
     <Compile Include="Generated\Pages\MapLocationProvider.generated.cs" />
     <Compile Include="Generated\Pages\MenuContainer.generated.cs" />

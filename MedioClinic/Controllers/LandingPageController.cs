@@ -30,6 +30,7 @@ namespace MedioClinic.Controllers
                 return HttpNotFound();
             }
 
+            Dependencies.CacheService.SetOutputCacheDependency(nodeAlias);
             var model = GetPageViewModel(landingPageDto.Title);
             HttpContext.Kentico().PageBuilder().Initialize(landingPageDto.DocumentId);
 

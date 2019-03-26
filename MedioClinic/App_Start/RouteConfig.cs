@@ -49,7 +49,7 @@ namespace MedioClinic
                 constraints: new { culture = new SiteCultureConstraint(AppConfig.Sitename), nodeGuid = new GuidRouteConstraint(), nodeAlias = new OptionalRouteConstraint(new AlphaRouteConstraint()) }
             );
 
-            // Maps route to langind pages
+            // Maps route to langing pages
             route = routes.MapRoute(
                 name: "LandingPage",
                 url: "{culture}/LandingPage/{nodeAlias}",

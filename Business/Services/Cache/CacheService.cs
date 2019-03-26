@@ -31,9 +31,28 @@ namespace Business.Services.Cache
             return $"nodeguid|{SiteContextService.SiteName}|{nodeGuid}".ToLowerInvariant();
         }
 
+        // Returns a dummy cache key for a page ("node") in the content tree identified by its "NodeAlias"
+        // "nodealias|<site name>| <given node in the content tree>"
+        // which is touched when the page is modified
+        public string GetNodeCacheDependencyKey(string nodeAliasPath)
+        {
+            return $"nodealias|{SiteContextService.SiteName}|{nodeAliasPath}".ToLowerInvariant();
+        }
+
         public void SetOutputCacheDependency(Guid nodeGuid)
         {
             var dependencyCacheKey = GetNodeCacheDependencyKey(nodeGuid);
+
+            // Ensures that the dummy key cache item exists
+            CacheHelper.EnsureDummyKey(dependencyCacheKey);
+
+            // Sets cache dependency to clear the cache when there is any change to node with given GUID in Kentico
+            HttpContext.Current.Response.AddCacheItemDependency(dependencyCacheKey);
+        }
+
+        public void SetOutputCacheDependency(string nodeAlias)
+        {
+            var dependencyCacheKey = GetNodeCacheDependencyKey(nodeAlias);
 
             // Ensures that the dummy key cache item exists
             CacheHelper.EnsureDummyKey(dependencyCacheKey);

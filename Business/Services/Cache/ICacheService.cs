@@ -27,6 +27,13 @@ namespace Business.Services.Cache
         void SetOutputCacheDependency(Guid nodeGuid);
 
         /// <summary>
+        /// Sets cache dependencies for the given node in the current HTTP context and ensures the otput cache is up-to-date
+        /// </summary>
+        /// <param name="nodeAlias">nodeAlias of the node</param>
+        /// <returns>Dependency key</returns>
+        void SetOutputCacheDependency(string nodeAlias);
+
+        /// <summary>
         /// Caches the result of the given function using Kentico Cache & dependencies
         /// </summary>
         /// <typeparam name="TData">Type of cached Data</typeparam>

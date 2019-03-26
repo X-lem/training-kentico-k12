@@ -12,13 +12,12 @@
                         "unorderedlist",
                         "h1",
                         "h2",
-                        "h3",
-                        "customHtml"
+                        "h3"
                     ]
                 },
                 imageDragging: false,
                 extensions: {
-                  imageDragging: {}
+                    imageDragging: {}
                 }
             };
 
@@ -45,23 +44,3 @@
         }
     });
 })();
-
-div.medium-editor-anchor-preview, div.medium-editor-toolbar {
-    z-index: 100000;
-}
-
-.medium-editor-element:focus {
-    outline: 0;
-}
-
-.medium-editor-element:not([data-medium-focused]):hover {
-    background-color: rgba(155, 155, 155, 0.17);
-}
-
-.medium-editor-placeholder:after {
-    position: relative !important;
-}
-
-.medium-editor-placeholder *:only-child br:only-child {
-    display: none;
-}
