@@ -1096,6 +1096,8 @@
     <Content Include="Content\InlineEditors\Shared\dropzone-common.js" />
     <Content Include="Content\InlineEditors\Shared\dropzone.js" />
     <Content Include="Content\InlineEditors\Shared\DropzoneCommon.css" />
+    <Content Include="Content\InlineEditors\SlideshowEditor\slideshow-editor.js" />
+    <Content Include="Content\InlineEditors\SlideshowEditor\SlideshowEditor.css" />
     <Content Include="Content\InlineEditors\TextEditor\medium-editor\css\medium-editor.css" />
     <Content Include="Content\InlineEditors\TextEditor\medium-editor\css\themes\beagle.css" />
     <Content Include="Content\InlineEditors\TextEditor\medium-editor\css\themes\beagle.min.css" />
@@ -1238,9 +1240,7 @@
       <Name>Business</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Content\InlineEditors\SlideshowEditor\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="App_Data\Global\Resources\Kentico.Builder.resx">
       <SubType>Designer</SubType>
