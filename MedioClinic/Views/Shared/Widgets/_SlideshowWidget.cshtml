@@ -1,0 +1,105 @@
+﻿@using CMS.DocumentEngine
+@using MedioClinic.Models
+@using MedioClinic.Models.Widgets
+@using MedioClinic.Models.InlineEditors
+@model SlideshowWidgetViewModel
+
+@{
+    var editMode = Context.Kentico().PageBuilder().EditMode;
+    var swiperId = "swiper-" + Guid.NewGuid().ToString().ToLower();
+    var containerAspectRatio = (double)Model.Width / (double)Model.Height;
+
+    // Gets the image constraint in case "Enforce dimensions in the live site" is checked (and for the edit mode).
+    IImageSizeConstraint GetImageSizeConstraint(DocumentAttachment documentAttachment, int frameWidth, int frameHeight)
+    {
+        var attachmentAspectRatio = (double)documentAttachment.AttachmentImageWidth / (double)documentAttachment.AttachmentImageHeight;
+
+        if (containerAspectRatio >= attachmentAspectRatio)
+        {
+            return new Width(frameWidth);
+        }
+        else
+        {
+            return new Height(frameHeight);
+        }
+    }
+}
+
+<div class="swiper-container" id="@swiperId">
+    <div class="swiper-wrapper">
+        @if (Model.Images != null && Model.Images.Any())
+        {
+        var dimensionAttribute = string.Empty;
+
+        // Calculate whether images are responsive or with fixed dimensions.
+        if (!editMode && Model.EnforceDimensions)
+        {
+        dimensionAttribute = $"width=\"{Model.Width}\" height=\"{Model.Height}\"";
+        }
+        else
+        {
+        dimensionAttribute = $"class=\"responsive-img\"";
+        }
+
+        // Loop through all images.
+        foreach (var image in Model.Images)
+        {
+        if (image != null)
+        {
+        string imageUrl;
+
+        if (!editMode && Model.EnforceDimensions)
+        {
+        // In edit mode and with "Enforce dimensions in the live site", we can leverage Kentico responsive images feature to get images resized to fixed dimensions.
+        var sizeConstraint = GetImageSizeConstraint(image, Model.Width, Model.Height);
+        imageUrl = Url.KenticoImageUrl(image.GetPath(), sizeConstraint);
+        }
+        else
+        {
+        // Otherwise, we can get the full sized images and let Materialize CSS resize them via browser-side code.
+        imageUrl = Url.KenticoImageUrl(image.GetPath());
+        }
+
+        <div class="swiper-slide">
+            <img src="@Html.Raw(imageUrl)" @Html.Raw(dimensionAttribute) id="i-@image.AttachmentGUID" />
+        </div>
+        }
+        }
+        }
+    </div>
+
+    @if (editMode || Model.DisplayArrowSigns)
+    {
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+    }
+
+    @if (editMode)
+    {
+    Html.RenderPartial("InlineEditors/_SlideshowEditor", new SlideshowEditorViewModel
+    {
+    PropertyName = nameof(SlideshowWidgetProperties.ImageIds),
+    Images = Model.Images,
+    Width = Model.Width,
+    Height = Model.Height,
+    SwiperId = swiperId
+    });
+    }
+</div>
+
+@* Partial views don't support @section directives. *@
+<script>
+    @{
+        var editModeLiteral = editMode.ToString().ToLower();
+        var initSwiperLiteral = $"window.medioClinic.slideshowWidget.initSwiper(\"{swiperId}\", {editModeLiteral}, {Model.TransitionDelay}, {Model.TransitionSpeed});";
+    }
+
+    // Initialize the current Swiper object.
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", function () {
+                @Html.Raw(initSwiperLiteral)
+            });
+    } else {
+        @Html.Raw(initSwiperLiteral)
+    }
+</script>

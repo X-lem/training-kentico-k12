@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
-
+using Business.Services.Context;
 using CMS.DocumentEngine;
 using Kentico.PageBuilder.Web.Mvc;
 using MedioClinic.Controllers.Widgets;
@@ -9,8 +9,8 @@ using MedioClinic.Models.Widgets;
 [assembly: RegisterWidget(
     "MedioClinic.Widget.Image",
     typeof(ImageWidgetController),
-    "Image",
-    Description = "Image widget",
+    "{$Widget.Image.Name$}",
+    Description = "{$Widget.Image.Description$}",
     IconClass = "icon-picture")]
 
 namespace MedioClinic.Controllers.Widgets
@@ -28,6 +28,11 @@ namespace MedioClinic.Controllers.Widgets
             });
         }
 
+        /// <summary>
+        /// Gets a page attachment image by the properties.
+        /// </summary>
+        /// <param name="properties">Properties with the GUID.</param>
+        /// <returns>The <see cref="DocumentAttachment"/> with the image.</returns>
         protected DocumentAttachment GetImage(ImageWidgetProperties properties)
         {
             var page = GetPage();
