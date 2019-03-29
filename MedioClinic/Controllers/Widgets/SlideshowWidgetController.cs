@@ -9,10 +9,10 @@ using MedioClinic.Controllers.Widgets;
 using MedioClinic.Models.Widgets;
 
 [assembly: RegisterWidget(
-    "MedioClinic.Widget.Slideshow",
-    typeof(SlideshowWidgetController),
-    "{$Widget.Slideshow.Name$}",
-    Description = "{$Widget.Slideshow.Description$}",
+    "MedioClinic.Widget.Slideshow", 
+    typeof(SlideshowWidgetController), 
+    "{$Widget.Slideshow.Name$}", 
+    Description = "{$Widget.Slideshow.Description$}", 
     IconClass = "icon-carousel")]
 
 namespace MedioClinic.Controllers.Widgets

@@ -39,7 +39,7 @@ namespace MedioClinic.Controllers.Widgets
                     return ErrorHelper.HandleException(nameof(ImageUploaderController.Upload), ex, ErrorHelper.UnprocessableStatusCode);
                 }
 
-                return Json(new { guid = imageGuid });
+                return Json(new { guid = imageGuid }); 
             }
 
             return new HttpStatusCodeResult(ErrorHelper.UnprocessableStatusCode);

@@ -511,6 +511,9 @@
     <Compile Include="Repository\Doctor\DoctorSectionRepository.cs" />
     <Compile Include="Repository\Doctor\IDoctorRepository.cs" />
     <Compile Include="Repository\Doctor\IDoctorSectionRepository.cs" />
+    <Compile Include="Repository\Forms\FormItemRepository.cs" />
+    <Compile Include="Repository\Forms\IFormItemRepository.cs" />
+    <Compile Include="Repository\Forms\IFormViewModel.cs" />
     <Compile Include="Repository\Home\HomeSectionRepository.cs" />
     <Compile Include="Repository\Home\IHomeSectionRepository.cs" />
     <Compile Include="Repository\BasicSection\IBasicSectionRepository.cs" />

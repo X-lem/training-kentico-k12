@@ -1,0 +1,119 @@
+﻿@using CMS.Helpers
+@using CMS.MediaLibrary
+@using Kentico.Forms.Web.Mvc
+@using MedioClinic.Models.FormComponents
+@using MedioClinic.Extensions
+@model MediaLibraryUploaderComponent
+
+@{
+    const int PreviewImageMaximumSize = 320;
+
+    int RoundDoubleCalculation(Func<double> doubleCalculation) =>
+        Convert.ToInt32(Math.Round(doubleCalculation(), MidpointRounding.AwayFromZero));
+
+    // Gets the current page ID, if any.
+    // Returns -1 in the Form builder tab, 0 in the Recorded data tab.
+    int GetCurrentPageId()
+    {
+        var feature = Context.Kentico().PageBuilder();
+        int pageId = -1;
+
+        try
+        {
+            pageId = feature.PageIdentifier;
+        }
+        catch
+        {
+            // Rendered inside the Forms app, just return -1.
+        }
+
+        return pageId;
+    }
+
+    // Gets the URL to the MediaLibraryUploaderController's action.
+    // Takes the filePathId and passes it to the controller to know which form element to fill with the file GUID.
+    string GetActionUrl(string filePathId)
+    {
+        var path = Url.Action("Upload", "MediaLibraryUploader", new
+        {
+            filePathId = filePathId,
+            mediaLibraryId = Model.Properties.MediaLibraryId
+        });
+
+        var decorated = VirtualContext.GetPreviewPathFromVirtualContext(path, false, "en-us", true); ;
+
+        return decorated;
+    }
+
+    int currentPageId = GetCurrentPageId();
+
+    if (currentPageId == 0)
+    {
+        // When in Recorded data tab:
+
+        Guid guid;
+        guid = Guid.TryParse(Model.FileGuid, out guid) ? guid : Guid.Empty;
+        var mediaFileInfo = MediaFileInfoProvider.GetMediaFileInfo(guid, Model.SiteName);
+
+        if (mediaFileInfo != null)
+        {
+            var ratio = (double)mediaFileInfo.FileImageWidth / (double)mediaFileInfo.FileImageHeight;
+            int previewWidth, previewHeight;
+
+
+            if (ratio > 1)
+            {
+                previewWidth = PreviewImageMaximumSize;
+                previewHeight = RoundDoubleCalculation(() => PreviewImageMaximumSize / ratio);
+            }
+            else if (ratio < 1)
+            {
+                previewWidth = RoundDoubleCalculation(() => PreviewImageMaximumSize * ratio);
+                previewHeight = PreviewImageMaximumSize;
+            }
+            else
+            {
+                previewWidth = PreviewImageMaximumSize;
+                previewHeight = PreviewImageMaximumSize;
+            }
+
+            var mediaFileUrl = MediaLibraryHelper.GetPermanentUrl(mediaFileInfo);
+
+            <img src="@Url.KenticoImageUrl(mediaFileUrl, new MedioClinic.Models.MaxWidthOrHeight(PreviewImageMaximumSize))" width="@Html.Raw(previewWidth)" height="@Html.Raw(previewHeight)" />
+        }
+        else
+        {
+            <p>There is no image with the ID @Html.Raw(Model.FileGuid) found in any of the media libraries.</p>
+        }
+    }
+    else
+    {
+        // When in Form builder tab and in the Form widget:
+
+        string currentFilePathId = Html.IdFor(model => model.FileGuid).ToString();
+        IDictionary<string, object> fileInputAttributes = ViewData.GetEditorHtmlAttributes();
+        fileInputAttributes["onchange"] = "window.medioClinic.mediaLibraryUploaderComponent.renderFileDetails(this);";
+        IDictionary<string, object> hiddenInputAttributes = ViewData.GetEditorHtmlAttributes();
+        IDictionary<string, object> buttonAttributes = ViewData.GetEditorHtmlAttributes();
+        buttonAttributes["onclick"] = $"window.medioClinic.mediaLibraryUploaderComponent.uploadFile(this, \"{GetActionUrl(currentFilePathId)}\");";
+        buttonAttributes["type"] = "button";
+
+        <div class="kn-media-library-uploader grey lighten-5">
+            <div class="row">
+                <div class="col s6">
+                    @Html.CustomInput("file", "mediaLibraryUploader", string.Empty, fileInputAttributes)
+                    @Html.HiddenFor(model => model.FileGuid, hiddenInputAttributes)
+                </div>
+                <div class="kn-upload-file-details col s6">
+                    <div class="kn-file-size"></div>
+                    <div class="kn-file-type"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s6 upload-button">
+                    @Html.Button(Html.Localize("FormComponent.MediaLibraryUploader.Upload"), buttonAttributes)
+                </div>
+            </div>
+        </div>
+    }
+}

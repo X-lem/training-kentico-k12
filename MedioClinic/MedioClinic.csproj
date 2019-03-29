@@ -607,6 +607,7 @@
       <HintPath>..\packages\System.Data.HashFunction.Interfaces.2.0.0\lib\net45\System.Data.HashFunction.Interfaces.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <HintPath>..\packages\System.IO.FileSystem.Primitives.4.0.1\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
       <Private>True</Private>
@@ -689,6 +690,7 @@
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Xml" />
     <Reference Include="Ude, Version=0.1.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9">
       <HintPath>..\packages\Kentico.Libraries.12.0.0\lib\net461\Ude.dll</HintPath>
       <Private>True</Private>
@@ -1084,6 +1086,7 @@
     <Content Include="Content\Css\Master\style.css" />
     <Content Include="Content\FormComponents\MediaLibraryUploader\media-library-uploader-component.js" />
     <Content Include="Content\FormComponents\MediaLibraryUploader\MediaLibraryUploaderComponent.css" />
+    <Content Include="Content\FormSections\FormSections.css" />
     <Content Include="Content\Images\facebook.png" />
     <Content Include="Content\Images\Logo\favicon.png" />
     <Content Include="Content\Images\Logo\Logoic.png" />
@@ -1153,6 +1156,9 @@
     <Content Include="Views\Shared\InlineEditors\_ImageUploaderEditor.cshtml" />
     <Content Include="Views\Shared\Widgets\_SlideshowWidget.cshtml" />
     <Content Include="Views\Shared\InlineEditors\_SlideshowEditor.cshtml" />
+    <Content Include="Views\Shared\FormComponents\_MedioClinic.FormComponent.MediaLibrarySelection.cshtml" />
+    <Content Include="Views\Shared\FormComponents\_MedioClinic.FormComponent.MediaLibraryUploader.cshtml" />
+    <Content Include="Views\FormTest\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\ApplicationConfig.cs" />
@@ -1188,9 +1194,17 @@
     <Compile Include="Models\Contact\ContactViewModel.cs" />
     <Compile Include="Models\Doctors\DoctorDetailViewModel.cs" />
     <Compile Include="Models\Doctors\DoctorsViewModel.cs" />
+    <Compile Include="Models\FormComponents\MediaLibrarySelection\MediaLibrarySelectionComponent.cs" />
+    <Compile Include="Models\FormComponents\MediaLibrarySelection\MediaLibrarySelectionProperties.cs" />
+    <Compile Include="Models\FormComponents\MediaLibraryUploader\MediaLibraryUploaderComponent.cs" />
+    <Compile Include="Models\FormComponents\MediaLibraryUploader\MediaLibraryUploaderProperties.cs" />
+    <Compile Include="Models\Forms\BaseFormViewModel.cs" />
+    <Compile Include="Models\Forms\FloridaEventRegistrationViewModel.cs" />
+    <Compile Include="Models\FormValidationRules\MediaLibraryImageDimensionValidationRule.cs" />
     <Compile Include="Models\Home\HomeViewModel.cs" />
-    <Compile Include="Models\InlineEditors\ImageUploaderEditorViewModel.cs" />
+    <Compile Include="Models\InlineEditors\ImageUploaderEditor\ImageUploaderEditorViewModel.cs" />
     <Compile Include="Models\InlineEditors\InlineEditorViewModel.cs" />
+    <Compile Include="Models\InlineEditors\SlideshowEditor\SlideshowEditorViewModel.cs" />
     <Compile Include="Models\InlineEditors\TextEditor\TextEditorViewModel.cs" />
     <Compile Include="Models\IViewModel.cs" />
     <Compile Include="Models\KenticoSizeConstraints.cs" />

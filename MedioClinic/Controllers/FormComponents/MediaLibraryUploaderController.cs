@@ -19,12 +19,12 @@ namespace MedioClinic.Controllers
         protected IErrorHelper ErrorHelper { get; }
 
         public MediaLibraryUploaderController(
-            IFileManagementHelper fileManagementHelper,
+            IFileManagementHelper fileManagementHelper, 
             IErrorHelper errorHandler)
         {
-            FileManagementHelper = fileManagementHelper
+            FileManagementHelper = fileManagementHelper 
                 ?? throw new ArgumentNullException(nameof(fileManagementHelper));
-            ErrorHelper = errorHandler
+            ErrorHelper = errorHandler 
                 ?? throw new ArgumentNullException(nameof(errorHandler));
         }
 
@@ -69,8 +69,8 @@ namespace MedioClinic.Controllers
                         catch (Exception ex)
                         {
                             return ErrorHelper.HandleException(
-                                nameof(MediaLibraryUploaderController.Upload),
-                                ex,
+                                nameof(MediaLibraryUploaderController.Upload), 
+                                ex, 
                                 ErrorHelper.UnprocessableStatusCode);
                         }
 

@@ -7,10 +7,10 @@ using MedioClinic.Controllers.Widgets;
 using MedioClinic.Models.Widgets;
 
 [assembly: RegisterWidget(
-    "MedioClinic.Widget.Image",
-    typeof(ImageWidgetController),
-    "{$Widget.Image.Name$}",
-    Description = "{$Widget.Image.Description$}",
+    "MedioClinic.Widget.Image", 
+    typeof(ImageWidgetController), 
+    "{$Widget.Image.Name$}", 
+    Description = "{$Widget.Image.Description$}", 
     IconClass = "icon-picture")]
 
 namespace MedioClinic.Controllers.Widgets
@@ -36,8 +36,8 @@ namespace MedioClinic.Controllers.Widgets
         protected DocumentAttachment GetImage(ImageWidgetProperties properties)
         {
             var page = GetPage();
-
+            
             return page?.AllAttachments.FirstOrDefault(x => x.AttachmentGUID == properties.ImageGuid);
         }
-    }
+    } 
 }

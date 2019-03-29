@@ -6,10 +6,10 @@ using MedioClinic.Models.Widgets;
 using Kentico.PageBuilder.Web.Mvc;
 
 [assembly: RegisterWidget(
-    "MedioClinic.Widget.Text",
-    typeof(TextWidgetController),
-    "{$Widget.Text.Name$}",
-    Description = "{$Widget.Text.Description$}",
+    "MedioClinic.Widget.Text", 
+    typeof(TextWidgetController), 
+    "{$Widget.Text.Name$}", 
+    Description = "{$Widget.Text.Description$}", 
     IconClass = "icon-l-text")]
 
 namespace MedioClinic.Controllers.Widgets
