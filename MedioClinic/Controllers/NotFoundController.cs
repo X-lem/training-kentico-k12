@@ -18,6 +18,5 @@ namespace MedioClinic.Controllers
 
             return View(model);
         }
-       
     }
 }

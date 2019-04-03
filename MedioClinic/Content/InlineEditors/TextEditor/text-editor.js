@@ -1,4 +1,4 @@
-(function () {
+﻿(function () {
     window.kentico.pageBuilder.registerInlineEditor("text-editor", {
         init: function (options) {
             var editor = options.editor;
@@ -17,7 +17,7 @@
                 },
                 imageDragging: false,
                 extensions: {
-                    imageDragging: {}
+                  imageDragging: {}
                 }
             };
 

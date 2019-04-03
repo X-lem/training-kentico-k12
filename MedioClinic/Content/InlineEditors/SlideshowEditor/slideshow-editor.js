@@ -12,6 +12,7 @@
 
             // Image GUID retrieval: Alternative 1 (begin)
             /*var slideIds = window.medioClinic.slideshowWidget.collectImageIds(swiper);
+
             var imageGuids = slideIds.map(function (slideId) {
                 return window.medioClinic.slideshowWidget.getGuidFromId(slideId);
             });*/

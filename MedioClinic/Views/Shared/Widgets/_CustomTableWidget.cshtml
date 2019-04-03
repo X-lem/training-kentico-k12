@@ -1,0 +1,65 @@
+﻿@using MedioClinic.Models.InlineEditors
+@using MedioClinic.Models.Widgets
+@using CMS.DataEngine;
+@using CMS.CustomTables;
+@model MedioClinic.Models.Widgets.CustomTableWidgetViewModel
+
+
+@{
+    bool editMode = Context.Kentico().PageBuilder().EditMode;
+}
+
+<head>
+    <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css">
+</head>
+<style>
+    table {
+        overflow: scroll;
+        word-wrap: break-word;
+        width: 100%;
+    }
+</style>
+
+@if (editMode)
+{
+    Html.RenderPartial("InlineEditors/_CustomTableEditor", new CustomTableEditorViewModel
+    {
+        CustomTableCodeName = Model.CustomTableCodeName,
+        MaxRows = Model.MaxRows,
+        OrderBy = Model.OrderBy
+    });
+}
+else
+{
+
+    string customeTableName = "MedioClinic.Diseases";
+    DataClassInfo customTable = DataClassInfoProvider.GetDataClassInfo(customeTableName);
+
+    if (customTable != null)
+    {
+        <table class="table row-hover table-border row-border mt-4" data-horizontal-scroll="true" id="example" data-role="table" data-pagination="true">
+            <thead>
+                <tr>
+                    <th class="sortable-column">Name</th>
+                    <th class="sortable-column">Description</th>
+                    <th class="sortable-column">Category</th>
+                    <th class="sortable-column">Anatomy Effected</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in CustomTableItemProvider.GetItems(customeTableName).OrderBy("Name"))
+                {
+                    <tr>
+                        <td>@item.GetValue("Name")</td>
+                        <td>@item.GetValue("Description")</td>
+                        <td>@item.GetValue("Category")</td>
+                        <td>@item.GetValue("AnatomyEffected")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
+}

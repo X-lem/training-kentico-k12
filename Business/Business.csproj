@@ -445,7 +445,6 @@
     <Compile Include="DependencyInjection\BusinessDependencies.cs" />
     <Compile Include="DependencyInjection\CmsRegistrationSource.cs" />
     <Compile Include="DependencyInjection\IBusinessDependencies.cs" />
-    <Compile Include="Dto\BasicSection\BasicSectionDto.cs" />
     <Compile Include="Dto\Company\CompanyDto.cs" />
     <Compile Include="Dto\Company\CompanyServiceDto.cs" />
     <Compile Include="Dto\Contact\ContactSectionDto.cs" />
@@ -462,6 +461,7 @@
     <Compile Include="Dto\Schools\SchoolDto.cs" />
     <Compile Include="Dto\Schools\SchoolSectionDto.cs" />
     <Compile Include="Dto\Social\SocialLinkDto.cs" />
+    <Compile Include="Generated\Forms\FloridaEventRegistration.generated.cs" />
     <Compile Include="Generated\Pages\BasicSection.generated.cs" />
     <Compile Include="Generated\Pages\BasicSectionProvider.generated.cs" />
     <Compile Include="Generated\Pages\Company.generated.cs" />
@@ -498,7 +498,6 @@
     <Compile Include="Generated\Pages\SocialLinksFolderProvider.generated.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\BaseRepository.cs" />
-    <Compile Include="Repository\BasicSection\BasicSectionRepository.cs" />
     <Compile Include="Repository\Company\CompanyRepository.cs" />
     <Compile Include="Repository\Company\CompanyServiceRepository.cs" />
     <Compile Include="Repository\Company\ICompanyRepository.cs" />
@@ -516,7 +515,6 @@
     <Compile Include="Repository\Forms\IFormViewModel.cs" />
     <Compile Include="Repository\Home\HomeSectionRepository.cs" />
     <Compile Include="Repository\Home\IHomeSectionRepository.cs" />
-    <Compile Include="Repository\BasicSection\IBasicSectionRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\LandingPage\ILandingPageRepository.cs" />
     <Compile Include="Repository\LandingPage\LandingPageRepository.cs" />

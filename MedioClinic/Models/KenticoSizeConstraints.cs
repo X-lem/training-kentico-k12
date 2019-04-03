@@ -2,7 +2,6 @@
 
 namespace MedioClinic.Models
 {
-
     /// <summary>
     /// Interface for size constrains so that we can avoid using Kentico code directly in views
     /// </summary>
@@ -52,5 +51,4 @@ namespace MedioClinic.Models
             return SizeConstraint.MaxWidthOrHeight(_maxWidthOrHeight);
         }
     }
-
 }

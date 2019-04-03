@@ -6,14 +6,14 @@
             var clickable = editor.querySelector(".dz-clickable");
 
             var dropzone = new Dropzone(zone, {
-                acceptedFiles: window.medioClinic.dropzoneCommon.acceptedFiles,
-                maxFiles: 1,
-                url: editor.getAttribute("data-upload-url"),
-                createImageThumbnails: false,
-                clickable: clickable,
-                dictInvalidFileType: options.localizationService.getString(
-                    "InlineEditors.Dropzone.InvalidFileType")
-            });
+                    acceptedFiles: window.medioClinic.dropzoneCommon.acceptedFiles,
+                    maxFiles: 1,
+                    url: editor.getAttribute("data-upload-url"),
+                    createImageThumbnails: false,
+                    clickable: clickable,
+                    dictInvalidFileType: options.localizationService.getString(
+                        "InlineEditors.Dropzone.InvalidFileType")
+                });
 
             dropzone.on("success",
                 function (event) {

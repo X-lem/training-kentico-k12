@@ -1119,6 +1119,10 @@
     <Content Include="Content\InlineEditors\TextEditor\medium-editor\js\medium-editor.js" />
     <Content Include="Content\InlineEditors\TextEditor\text-editor.js" />
     <Content Include="Content\InlineEditors\TextEditor\TextEditor.css" />
+    <Content Include="Content\Widgets\SlideshowWidget\slideshow-widget.js" />
+    <Content Include="Content\Widgets\SlideshowWidget\SlideshowWidget.css" />
+    <Content Include="Content\Widgets\SlideshowWidget\swiper\css\swiper.css" />
+    <Content Include="Content\Widgets\SlideshowWidget\swiper\js\swiper.js" />
     <Content Include="Global.asax" />
     <Content Include="bin\Business.dll.config" />
     <Content Include="bin\MedioClinic.dll.config" />
@@ -1132,6 +1136,7 @@
     <Content Include="bin\roslyn\vbc.exe.config" />
     <Content Include="bin\roslyn\vbc.rsp" />
     <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
+    <Content Include="App_Data\CMSModules\WebFarm\webfarm.sync" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -1159,6 +1164,8 @@
     <Content Include="Views\Shared\FormComponents\_MedioClinic.FormComponent.MediaLibrarySelection.cshtml" />
     <Content Include="Views\Shared\FormComponents\_MedioClinic.FormComponent.MediaLibraryUploader.cshtml" />
     <Content Include="Views\FormTest\Index.cshtml" />
+    <Content Include="Views\Shared\Widgets\_CustomTableWidget.cshtml" />
+    <Content Include="Views\Shared\InlineEditors\_CustomTableEditor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\ApplicationConfig.cs" />
@@ -1170,18 +1177,20 @@
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\DoctorsController.cs" />
     <Compile Include="Controllers\FormComponents\MediaLibraryUploaderController.cs" />
+    <Compile Include="Controllers\FormTestController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InlineEditors\ImageUploaderController.cs" />
     <Compile Include="Controllers\InlineEditors\SlideshowManagementController.cs" />
     <Compile Include="Controllers\LandingPageController.cs" />
     <Compile Include="Controllers\NotFoundController.cs" />
     <Compile Include="Controllers\SchoolsController.cs" />
-    <Compile Include="Controllers\BasicSectionController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\Sections\SingleColumnSectionController.cs" />
+    <Compile Include="Controllers\Sections\ThreeColumnEqualSectionController.cs" />
     <Compile Include="Controllers\Sections\TwoColumnFiftyFiftySectionController.cs" />
     <Compile Include="Controllers\Sections\TwoColumnFourtySixtySectionController.cs" />
     <Compile Include="Controllers\Sections\TwoColumnSixtyFourtySectionController.cs" />
+    <Compile Include="Controllers\Widgets\CustomTableWidgetController.cs" />
     <Compile Include="Controllers\Widgets\ImageWidgetController.cs" />
     <Compile Include="Controllers\Widgets\SlideshowWidgetController.cs" />
     <Compile Include="Controllers\Widgets\TextWidgetController.cs" />
@@ -1190,7 +1199,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\BasicSection\BasicSectionViewModel.cs" />
     <Compile Include="Models\Contact\ContactViewModel.cs" />
     <Compile Include="Models\Doctors\DoctorDetailViewModel.cs" />
     <Compile Include="Models\Doctors\DoctorsViewModel.cs" />
@@ -1202,6 +1210,7 @@
     <Compile Include="Models\Forms\FloridaEventRegistrationViewModel.cs" />
     <Compile Include="Models\FormValidationRules\MediaLibraryImageDimensionValidationRule.cs" />
     <Compile Include="Models\Home\HomeViewModel.cs" />
+    <Compile Include="Models\InlineEditors\CustomTable\CustomTableEditorViewModel.cs" />
     <Compile Include="Models\InlineEditors\ImageUploaderEditor\ImageUploaderEditorViewModel.cs" />
     <Compile Include="Models\InlineEditors\InlineEditorViewModel.cs" />
     <Compile Include="Models\InlineEditors\SlideshowEditor\SlideshowEditorViewModel.cs" />
@@ -1212,6 +1221,8 @@
     <Compile Include="Models\Schools\SchoolDetailViewModel.cs" />
     <Compile Include="Models\Schools\SchoolsViewModel.cs" />
     <Compile Include="Models\SearchResult\SearchResultModel.cs" />
+    <Compile Include="Models\Widgets\CustomTableWidget\CustomTableWidgetProperties.cs" />
+    <Compile Include="Models\Widgets\CustomTableWidget\CustomTableWidgetViewModel.cs" />
     <Compile Include="Models\Widgets\ImageWidget\ImageWidgetProperties.cs" />
     <Compile Include="Models\Widgets\ImageWidget\ImageWidgetViewModel.cs" />
     <Compile Include="Models\Widgets\SlideshowWidget\SlideshowWidgetProperties.cs" />
@@ -1242,8 +1253,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Schools\Detail.cshtml" />
     <Content Include="Views\Schools\Index.cshtml" />
-    <Content Include="Views\Shared\Sections\_BasicSection.cshtml" />
-    <Content Include="Views\BasicSection\Index.cshtml" />
+    <Content Include="Views\Shared\Sections\_ThreeColumnSection.cshtml" />
     <Content Include="Views\Search\SearchIndex.cshtml" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
@@ -1254,7 +1264,9 @@
       <Name>Business</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\Temp\SlideshowEditor\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Global\Resources\Kentico.Builder.resx">
       <SubType>Designer</SubType>
