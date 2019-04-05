@@ -707,6 +707,7 @@
   <ItemGroup>
     <Content Include="App_Themes\Default\Images\DocumentTypeIcons\48x48\medioclinic_school.png" />
     <Content Include="App_Themes\Default\Images\DocumentTypeIcons\48x48\medioclinic_schoolsection.png" />
+    <Content Include="App_Themes\Default\Images\DocumentTypeIcons\search-icon.png" />
     <Content Include="App_Themes\Default\Images\DocumentTypeIcons\medioclinic_school.png" />
     <Content Include="App_Themes\Default\Images\DocumentTypeIcons\medioclinic_schoolsection.png" />
     <Content Include="bin\AngleSharp.dll" />

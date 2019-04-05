@@ -2,6 +2,7 @@
 @using MedioClinic.Models.Widgets
 @using CMS.DataEngine;
 @using CMS.CustomTables;
+@using CMS.EventLog;
 @model MedioClinic.Models.Widgets.CustomTableWidgetViewModel
 
 
@@ -12,13 +13,6 @@
 <head>
     <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css">
 </head>
-<style>
-    table {
-        overflow: scroll;
-        word-wrap: break-word;
-        width: 100%;
-    }
-</style>
 
 @if (editMode)
 {
@@ -31,33 +25,53 @@
 }
 else
 {
-
-    string customeTableName = "MedioClinic.Diseases";
-    DataClassInfo customTable = DataClassInfoProvider.GetDataClassInfo(customeTableName);
-
-    if (customTable != null)
+    var customeTableName = "MedioClinic.Diseases";
+    try
     {
-        <table class="table row-hover table-border row-border mt-4" data-horizontal-scroll="true" id="example" data-role="table" data-pagination="true">
+        var customTable = CustomTableItemProvider.GetItems(customeTableName);
+        var firstObj = customTable.FirstOrDefault();
+
+        if (firstObj != null)
+        {
+        <table class="table row-hover table-border row-border mt-4" data-horizontal-scroll="true" id="example" data-role="table" data-pagination="true" data-rownum="true">
             <thead>
                 <tr>
-                    <th class="sortable-column">Name</th>
-                    <th class="sortable-column">Description</th>
-                    <th class="sortable-column">Category</th>
-                    <th class="sortable-column">Anatomy Effected</th>
+                    @foreach (var column in firstObj.ColumnNames)
+                    {
+                        if (column.StartsWith("Item"))
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            <th class="sortable-column">@column</th>
+                        }
+                    }
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in CustomTableItemProvider.GetItems(customeTableName).OrderBy("Name"))
+                @foreach (var item in customTable)
                 {
                     <tr>
-                        <td>@item.GetValue("Name")</td>
-                        <td>@item.GetValue("Description")</td>
-                        <td>@item.GetValue("Category")</td>
-                        <td>@item.GetValue("AnatomyEffected")</td>
+                        @foreach (var column in item.ColumnNames)
+                        {
+                            if (column.StartsWith("Item")) {
+                                continue;
+                            }
+                            else
+                            {
+                                <td>@item.GetValue(column)</td>
+                            }
+                        }
                     </tr>
                 }
             </tbody>
         </table>
+        }
+    }
+    catch (Exception ex)
+    {
+        EventLogProvider.LogException("Custom Table Widget", "EXCEPTION", ex, CMS.SiteProvider.SiteContext.CurrentSite.SiteID, string.Format("The following is not a valid custom table code name: {0}.", customeTableName));
     }
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>

@@ -460,6 +460,7 @@
     <Compile Include="Dto\Page\PageMetadataDto.cs" />
     <Compile Include="Dto\Schools\SchoolDto.cs" />
     <Compile Include="Dto\Schools\SchoolSectionDto.cs" />
+    <Compile Include="Dto\Search\SearchDto.cs" />
     <Compile Include="Dto\Social\SocialLinkDto.cs" />
     <Compile Include="Generated\Forms\FloridaEventRegistration.generated.cs" />
     <Compile Include="Generated\Pages\BasicSection.generated.cs" />
@@ -526,6 +527,8 @@
     <Compile Include="Repository\School\ISchoolSectionRepository.cs" />
     <Compile Include="Repository\School\SchoolRepository.cs" />
     <Compile Include="Repository\School\SchoolSectionRepository.cs" />
+    <Compile Include="Repository\Search\ISearchRespository.cs" />
+    <Compile Include="Repository\Search\SearchRespository.cs" />
     <Compile Include="Repository\Social\ISocialLinkRepository.cs" />
     <Compile Include="Repository\Social\SocialLinkRepository.cs" />
     <Compile Include="Services\Cache\CacheDependencyType.cs" />

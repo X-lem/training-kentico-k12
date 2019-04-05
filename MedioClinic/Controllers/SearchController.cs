@@ -43,7 +43,7 @@ namespace MedioClinic.Controllers
             SearchParameters searchParameters = SearchParameters.PrepareForPages(searchText, searchIndexes, 1, PAGE_SIZE, MembershipContext.AuthenticatedUser, "en-us", true);
             SearchResult searchResult = SearchHelper.Search(searchParameters);
 
-            var model = GetPageViewModel(new SearchResultModel()
+            var model = GetPageViewModel(new MedioClinic.Models.SearchResult.SearchResultModel()
             {
                 Items = searchResult.Items,
                 Query = searchText

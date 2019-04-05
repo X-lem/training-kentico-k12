@@ -8,7 +8,6 @@ using MedioClinic.Controllers.Sections;
     Description = "{$Section.TwoColumnFiftyFifty.Description$}", 
     IconClass = "icon-l-cols-2")]
 
-
 namespace MedioClinic.Controllers.Sections
 {
     public class TwoColumnFiftyFiftySectionController : Controller

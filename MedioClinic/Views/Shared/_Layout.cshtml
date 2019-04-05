@@ -5,6 +5,15 @@
 
 <!DOCTYPE html>
 <html lang="en">
+<script>
+    function toggle_visibility(id) {
+        var e = document.getElementById(id);
+        if (e.style.display == 'block')
+            e.style.display = 'none';
+        else
+            e.style.display = 'block';
+    }
+</script>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
@@ -47,6 +56,7 @@
                     }
                 </ul>
             }
+
             <ul class="right hide-on-med-and-down">
                 @foreach (var menuItem in Model.MenuItems)
                 {
@@ -70,7 +80,13 @@
                         <i class="fas fa-globe-africa right"></i>
                     </a>
                 </li>
+                <li>
+                    <a onclick="toggle_visibility('searchBar')">
+                        <img alt="Search" width="24" style="vertical-align: middle;" src="~/App_Themes/Default/Images/DocumentTypeIcons/search-icon.png" />
+                    </a>
+                </li>
             </ul>
+
             <ul id="nav-mobile" class="sidenav">
                 @foreach (var menuItem in Model.MenuItems)
                 {
@@ -90,9 +106,20 @@
             </ul>
             <a href="#" data-target="nav-mobile" class="sidenav-trigger">
                 <i class="material-icons">menu</i>
-            </a>
+            </a>            
         </div>
     </nav>
+
+    @* Search bar *@
+    <div id="searchBar" class="container" hidden="hidden" >
+        <div class="col-xs-12 col-md-7 col-lg-4">
+            @using (Html.BeginForm("SearchIndex", "Search", FormMethod.Get))
+            {
+                <input type="text" id="searchtext" name="searchtext" placeholder="Search" maxlength="1000" class="search-box-watermark" autocomplete="off">
+                @*<input type="submit" value="Submit" class="search-box-btn">*@
+            }
+        </div>
+    </div>
 
     @RenderBody()
 

@@ -2,17 +2,6 @@
 
 @model MedioClinic.Models.PageViewModel<HomeViewModel>
 
-@* Search bar *@
-<div class="container">
-    <div class="col-xs-12 col-md-7 col-lg-4">
-        @using (Html.BeginForm("SearchIndex", "Search", FormMethod.Get))
-        {
-            <input type="text" id="searchtext" name="searchtext" placeholder="Search" maxlength="1000" class="search-box-watermark" autocomplete="off">
-            @*<input type="submit" value="Submit" class="search-box-btn">*@
-        }
-    </div>
-</div>
-    
 @if (Model.Data.HomeSection != null)
 {
     <div class="section kn-section-top">

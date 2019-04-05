@@ -1,26 +1,37 @@
 ﻿@using CMS.Search;
+@using CMS.DocumentEngine;
 @using MedioClinic.Models.SearchResult;
 
-@model SearchResultModel
+@model MedioClinic.Models.PageViewModel<SearchResultModel>
 
-
-@if (!Model.Items.Any())
+@if (!Model.Data.Items.Any())
 {
-    if (!String.IsNullOrWhiteSpace(Model.Query))
+    if (!String.IsNullOrWhiteSpace(Model.Data.Query))
     {
-        <h3>No results found for "@Model.Query"</h3>
+        <div class="container">
+            <h3>No results found for "@Model.Data.Query"</h3>
+        </div>
     }
 }
 else
 {
-    <h3>Results for "@Model.Query"</h3>
-    foreach (SearchResultItem item in Model.Items)
-    {
-        <div>
-            <strong>@item.Title</strong>
+    <div class="container">
+        <h3>Results for <i>@Model.Data.Query</i></h3>
+        <div class="row">
+            @foreach (SearchResultItem item in Model.Data.Items)
+            {
+                TreeProvider tp = new TreeProvider();
+                var doc = tp.SelectSingleDocument(item.Data.GetIntegerValue("DocumentID", 0));
+
+                <div class="ktc-collapsible-div s12">
+                    <strong><a href="@DocumentURLProvider.GetAbsoluteLiveSiteURL(doc).ToLower()">@doc.GetValue("NodeName")</a></strong>
+                </div>
+
+                foreach (var col in item.Data.ColumnNames)
+                {
+                    <li>@col</li>
+                }
+            }
         </div>
-        <div>
-            @Html.Kentico().ResolveUrls(item.Content)
-        </div>
-    }
+    </div>
 }
