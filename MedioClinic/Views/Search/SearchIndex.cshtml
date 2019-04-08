@@ -1,6 +1,7 @@
 ﻿@using CMS.Search;
 @using CMS.DocumentEngine;
 @using MedioClinic.Models.SearchResult;
+@using CMS.Helpers;
 
 @model MedioClinic.Models.PageViewModel<SearchResultModel>
 
@@ -9,7 +10,7 @@
     if (!String.IsNullOrWhiteSpace(Model.Data.Query))
     {
         <div class="container">
-            <h3>No results found for "@Model.Data.Query"</h3>
+            <h3>No results found for <i>@Model.Data.Query</i></h3>
         </div>
     }
 }
@@ -21,17 +22,60 @@ else
             @foreach (SearchResultItem item in Model.Data.Items)
             {
                 TreeProvider tp = new TreeProvider();
-                var doc = tp.SelectSingleDocument(item.Data.GetIntegerValue("DocumentID", 0));
+                var node = tp.SelectSingleDocument(item.Data.GetIntegerValue("DocumentID", 0));
 
-                <div class="ktc-collapsible-div s12">
-                    <strong><a href="@DocumentURLProvider.GetAbsoluteLiveSiteURL(doc).ToLower()">@doc.GetValue("NodeName")</a></strong>
+                var siteDomain = ResHelper.GetString("RootDocument.AbsoluteURL");
+                if (siteDomain == DocumentURLProvider.GetAbsoluteLiveSiteURL(node).ToLower())
+                {
+                    continue;
+                }
+
+                <div class="card">
+                    <div class="card-content">
+                        @switch (node.GetStringValue("ClassName", string.Empty))
+                        {
+                            case "MedioClinic.Doctor":
+                                @PrintDoctor(node);
+                                break;
+                            case "MedioClinic.School":
+                                @PrintSchool(node);
+                                break;
+                            default:
+                                @PrintDefault(node);
+                                break;
+                        }
+                    </div>
                 </div>
 
-                foreach (var col in item.Data.ColumnNames)
+                @*foreach (var col in item.Data.ColumnNames)
                 {
-                    <li>@col</li>
-                }
+                    <li>@col: @item.Data.GetValue(col)</li>
+                }*@
             }
         </div>
+    </div>
+}
+
+
+@helper PrintDoctor(TreeNode node)
+{
+    <div class="s12">
+        <strong><a href="@DocumentURLProvider.GetAbsoluteLiveSiteURL(node).ToLower()">@node.GetStringValue("FirstName", string.Empty) @node.GetStringValue("LastName", string.Empty)</a></strong>
+        <p>@Html.Raw(node.GetStringValue("Bio", string.Empty))</p>
+    </div>
+}
+
+@helper PrintSchool(TreeNode node)
+{
+    <div class="s12">
+        <strong><a href="@DocumentURLProvider.GetAbsoluteLiveSiteURL(node).ToLower()">@node.GetStringValue("SchoolName", string.Empty)</a></strong>
+        <p>@Html.Raw(node.GetStringValue("Bio", string.Empty))</p>
+    </div>
+}
+
+@helper PrintDefault(TreeNode node)
+{
+    <div class="s12">
+        <strong><a href="@DocumentURLProvider.GetAbsoluteLiveSiteURL(node).ToLower()">@node.GetStringValue("NodeName", string.Empty)</a></strong>
     </div>
 }

@@ -9,7 +9,6 @@ namespace Business.Repository.School
 {
     public class SchoolRepository : BaseRepository, ISchoolRepository
     {
-
         private readonly string[] _schoolColumns =
         {
             // Defines database columns for retrieving data

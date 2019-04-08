@@ -9,7 +9,6 @@ namespace Business.Repository.Doctor
 {
     public class DoctorRepository : BaseRepository, IDoctorRepository
     {
-
         private readonly string[] _doctorColumns = 
         {
             // Defines database columns for retrieving data
