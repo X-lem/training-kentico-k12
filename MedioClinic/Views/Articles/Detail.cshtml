@@ -1,0 +1,44 @@
+﻿@using MedioClinic.Models.Articles
+
+@model MedioClinic.Models.PageViewModel<ArticleDetailViewModel>
+
+@if (Model.Data.Article != null)
+{
+    <style>
+        .title {
+            color: #455a64;
+            font-size: 4.2rem;
+            margin: 0;
+        }
+    </style>
+
+    <div class="container">
+        <div class="row">
+
+            @*Article*@
+            <div class="col l9 m8 s12">
+                <p class="title">@Model.Data.Article.Title</p>
+                @Model.Data.Article.DatePublished.ToString("f")
+                <hr />
+
+                <p>@Html.Raw(Model.Data.Article.Content)</p>
+
+                @* Authors *@
+                @{
+                    string[] authors = Model.Data.Article.Authors.Split('|');
+                }
+
+                <hr />
+                @foreach (var author in authors)
+                {
+                    <p>@author</p>
+                }
+            </div>
+
+            @*Ads*@
+            <div class="col l3 m4 s12" style="background-color: aqua;">
+                Test Article Ads
+            </div>
+        </div>
+    </div>
+}

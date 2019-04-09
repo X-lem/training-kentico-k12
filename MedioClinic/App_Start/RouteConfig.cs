@@ -49,6 +49,14 @@ namespace MedioClinic
                 constraints: new { culture = new SiteCultureConstraint(AppConfig.Sitename), nodeGuid = new GuidRouteConstraint(), nodeAlias = new OptionalRouteConstraint(new AlphaRouteConstraint()) }
             );
 
+            // Maps route to article detail
+            route = routes.MapRoute(
+                name: "ArticleWithAlias",
+                url: "{culture}/Articles/Detail/{nodeGuid}/{nodeAlias}",
+                defaults: new { action = "Detail", controller = "Articles", culture = defaultCulture.Name, nodeGuid = string.Empty, nodeAlias = "" },
+                constraints: new { culture = new SiteCultureConstraint(AppConfig.Sitename), nodeGuid = new GuidRouteConstraint(), nodeAlias = new OptionalRouteConstraint(new AlphaRouteConstraint()) }
+            );
+
             // Maps route to langing pages
             route = routes.MapRoute(
                 name: "LandingPage",

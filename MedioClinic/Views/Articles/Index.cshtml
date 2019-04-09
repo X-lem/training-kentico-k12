@@ -1,0 +1,53 @@
+﻿@using MedioClinic.Models.Articles
+
+@model MedioClinic.Models.PageViewModel<ArticlesViewModel>
+
+<div class="section kn-section-top">
+    <div class="container">
+        <!-- Doctors header section-->
+        <div class="row">
+            <h1 class="header col s12">@(Model.Data.ArticleSection?.Header)</h1>
+        </div>
+    </div>
+</div>
+
+<!--   Doctors Section   -->
+@if (Model.Data.Articles != null)
+{
+
+<div class="container">
+    <div class="row">
+        @foreach (var article in Model.Data.Articles)
+        {
+        <div class="col s12">
+            <div class="card horizontal">
+                <div class="card-image">
+                    @{
+                        var thumbnail = article.Thumbnail;
+                        string imgPath = string.Empty;
+
+                        if (thumbnail != null)
+                        {
+                            imgPath = Url.KenticoImageUrl(thumbnail.GetPath());
+                        }
+                    }
+                    <img style="max-width: 150px;" src="@imgPath" />
+                </div>
+
+                <div class="car-stacked">
+                    <div class="card-content">
+                        <h5>
+                            <a href="@Url.Action("Detail", "Articles", new { nodeGuid = article.NodeGuid, nodeAlias = article.NodeAlias })">
+                                @article.Title
+                            </a>
+                        </h5>
+                        @article.DatePublished.ToString("d")
+                        <p>@article.Summary</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>
+}

@@ -1167,6 +1167,8 @@
     <Content Include="Views\FormTest\Index.cshtml" />
     <Content Include="Views\Shared\Widgets\_CustomTableWidget.cshtml" />
     <Content Include="Views\Shared\InlineEditors\_CustomTableEditor.cshtml" />
+    <Content Include="Views\Articles\Detail.cshtml" />
+    <Content Include="Views\Articles\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\ApplicationConfig.cs" />
@@ -1174,6 +1176,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Config\AppConfig.cs" />
+    <Compile Include="Controllers\ArticlesController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\DoctorsController.cs" />
@@ -1200,6 +1203,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Articles\ArticleDetailViewModel.cs" />
+    <Compile Include="Models\Articles\ArticlesViewModel.cs" />
     <Compile Include="Models\Contact\ContactViewModel.cs" />
     <Compile Include="Models\Doctors\DoctorDetailViewModel.cs" />
     <Compile Include="Models\Doctors\DoctorsViewModel.cs" />

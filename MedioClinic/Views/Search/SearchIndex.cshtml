@@ -40,6 +40,9 @@ else
                             case "MedioClinic.School":
                                 @PrintSchool(node);
                                 break;
+                            case "MedioClinic.Article":
+                                @PrintArticle(node);
+                                break;
                             default:
                                 @PrintDefault(node);
                                 break;
@@ -48,9 +51,9 @@ else
                 </div>
 
                 @*foreach (var col in item.Data.ColumnNames)
-                {
-                    <li>@col: @item.Data.GetValue(col)</li>
-                }*@
+                    {
+                        <li>@col: @item.Data.GetValue(col)</li>
+                    }*@
             }
         </div>
     </div>
@@ -59,23 +62,26 @@ else
 
 @helper PrintDoctor(TreeNode node)
 {
-    <div class="s12">
-        <strong><a href="@DocumentURLProvider.GetAbsoluteLiveSiteURL(node).ToLower()">@node.GetStringValue("FirstName", string.Empty) @node.GetStringValue("LastName", string.Empty)</a></strong>
-        <p>@Html.Raw(node.GetStringValue("Bio", string.Empty))</p>
-    </div>
+    <strong>Doctor: <a href="@DocumentURLProvider.GetAbsoluteLiveSiteURL(node).ToLower()">@node.GetStringValue("FirstName", string.Empty) @node.GetStringValue("LastName", string.Empty)</a></strong>
+    <p>@Html.Raw(node.GetStringValue("Bio", string.Empty))</p>
 }
 
 @helper PrintSchool(TreeNode node)
 {
-    <div class="s12">
-        <strong><a href="@DocumentURLProvider.GetAbsoluteLiveSiteURL(node).ToLower()">@node.GetStringValue("SchoolName", string.Empty)</a></strong>
-        <p>@Html.Raw(node.GetStringValue("Bio", string.Empty))</p>
-    </div>
+    <strong>School <a href="@DocumentURLProvider.GetAbsoluteLiveSiteURL(node).ToLower()">@node.GetStringValue("SchoolName", string.Empty)</a></strong>
+    <p>@Html.Raw(node.GetStringValue("Bio", string.Empty))</p>
+}
+
+@helper PrintArticle(TreeNode node)
+{
+    DateTime articleDate = DateTime.Parse(node.GetStringValue("DatePublished", string.Empty));
+    
+    <strong>Article: <a href="@DocumentURLProvider.GetAbsoluteLiveSiteURL(node).ToLower()">@node.GetStringValue("Title", string.Empty)</a></strong>
+    <p><i>@articleDate.ToString("d")</i></p>
+    <p>@node.GetStringValue("Summary", string.Empty)</p>
 }
 
 @helper PrintDefault(TreeNode node)
 {
-    <div class="s12">
-        <strong><a href="@DocumentURLProvider.GetAbsoluteLiveSiteURL(node).ToLower()">@node.GetStringValue("NodeName", string.Empty)</a></strong>
-    </div>
+    <strong><a href="@DocumentURLProvider.GetAbsoluteLiveSiteURL(node).ToLower()">@node.GetStringValue("NodeName", string.Empty)</a></strong>
 }
