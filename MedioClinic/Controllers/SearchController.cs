@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using Business.DependencyInjection;
+using CMS.DocumentEngine;
 using CMS.Membership;
 using CMS.Search;
 using MedioClinic.Controllers;
@@ -32,8 +33,8 @@ namespace MedioClinic.Controllers
                 // Creates a model representing empty search results
                 SearchResultModel emptyModel = new SearchResultModel
                 {
-                    Items = new List<SearchResultItem>(),
-                    Query = String.Empty
+                    Query = String.Empty,
+                    SearchResultPages = new List<TreeNode>()
                 };
 
                 return View(emptyModel);
@@ -43,10 +44,24 @@ namespace MedioClinic.Controllers
             SearchParameters searchParameters = SearchParameters.PrepareForPages(searchText, searchIndexes, 1, PAGE_SIZE, MembershipContext.AuthenticatedUser, "en-us", true);
             SearchResult searchResult = SearchHelper.Search(searchParameters);
 
-            var model = GetPageViewModel(new MedioClinic.Models.SearchResult.SearchResultModel()
+            List<TreeNode> pageLists = new List<TreeNode>();
+            TreeProvider tp = new TreeProvider();
+
+            // Get pages for 
+            foreach (var item in searchResult.Items)
             {
-                Items = searchResult.Items,
-                Query = searchText
+                var node = tp.SelectSingleDocument(item.Data.GetIntegerValue("DocumentID", 0));
+
+                if (node != null)
+                {
+                    pageLists.Add(node);
+                }
+            }
+
+            var model = GetPageViewModel(new SearchResultModel()
+            {
+                Query = searchText,
+                SearchResultPages = pageLists
             }, searchText);
 
             return View(model);

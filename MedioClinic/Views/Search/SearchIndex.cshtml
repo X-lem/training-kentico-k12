@@ -1,11 +1,12 @@
 ﻿@using CMS.Search;
 @using CMS.DocumentEngine;
 @using MedioClinic.Models.SearchResult;
+@using CMS.DataEngine;
 @using CMS.Helpers;
 
 @model MedioClinic.Models.PageViewModel<SearchResultModel>
 
-@if (!Model.Data.Items.Any())
+@if (!Model.Data.SearchResultPages.Any())
 {
     if (!String.IsNullOrWhiteSpace(Model.Data.Query))
     {
@@ -19,17 +20,11 @@ else
     <div class="container">
         <h3>Results for <i>@Model.Data.Query</i></h3>
         <div class="row">
-            @foreach (SearchResultItem item in Model.Data.Items)
+            @foreach (var node in Model.Data.SearchResultPages)
             {
-                TreeProvider tp = new TreeProvider();
-                var node = tp.SelectSingleDocument(item.Data.GetIntegerValue("DocumentID", 0));
-
-                var siteDomain = ResHelper.GetString("RootDocument.AbsoluteURL");
-                if (siteDomain == DocumentURLProvider.GetAbsoluteLiveSiteURL(node).ToLower())
+                string url = DocumentURLProvider.GetAbsoluteLiveSiteURL(node).ToLower();
+                if (url != ResHelper.GetString("RootDocument.AbsoluteURL"))
                 {
-                    continue;
-                }
-
                 <div class="card">
                     <div class="card-content">
                         @switch (node.GetStringValue("ClassName", string.Empty))
@@ -49,11 +44,7 @@ else
                         }
                     </div>
                 </div>
-
-                @*foreach (var col in item.Data.ColumnNames)
-                    {
-                        <li>@col: @item.Data.GetValue(col)</li>
-                    }*@
+                }
             }
         </div>
     </div>

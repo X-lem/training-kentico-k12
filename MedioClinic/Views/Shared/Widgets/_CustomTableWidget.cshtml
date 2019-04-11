@@ -25,54 +25,33 @@
 }
 else
 {
-    var customeTableName = "MedioClinic.Diseases";
-    try
-    {
-        var customTable = CustomTableItemProvider.GetItems(customeTableName);
-        var firstObj = customTable.FirstOrDefault();
-
-        if (firstObj != null)
-        {
-        <table class="table row-hover table-border row-border mt-4" data-horizontal-scroll="true" id="example" data-role="table" data-pagination="true" data-rownum="true">
-            <thead>
+    <table class="table row-hover table-border row-border mt-4" data-horizontal-scroll="true" id="example" data-role="table" data-pagination="true" data-rownum="true">
+        <thead>
+            <tr>
+                @foreach (var column in Model.ColumnNames)
+                {
+                    <th class="sortable-column">@column</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.CustomTableData)
+            {
                 <tr>
-                    @foreach (var column in firstObj.ColumnNames)
+                    @foreach (var column in item.ColumnNames)
                     {
-                        if (column.StartsWith("Item"))
-                        {
+                        if (column.StartsWith("Item")) {
                             continue;
                         }
                         else
                         {
-                            <th class="sortable-column">@column</th>
+                            <td>@item.GetValue(column)</td>
                         }
                     }
                 </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in customTable)
-                {
-                    <tr>
-                        @foreach (var column in item.ColumnNames)
-                        {
-                            if (column.StartsWith("Item")) {
-                                continue;
-                            }
-                            else
-                            {
-                                <td>@item.GetValue(column)</td>
-                            }
-                        }
-                    </tr>
-                }
-            </tbody>
-        </table>
-        }
-    }
-    catch (Exception ex)
-    {
-        EventLogProvider.LogException("Custom Table Widget", "EXCEPTION", ex, CMS.SiteProvider.SiteContext.CurrentSite.SiteID, string.Format("The following is not a valid custom table code name: {0}.", customeTableName));
-    }
+            }
+        </tbody>
+    </table>
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>

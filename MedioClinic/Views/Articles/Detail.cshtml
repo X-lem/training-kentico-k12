@@ -1,4 +1,7 @@
 ﻿@using MedioClinic.Models.Articles
+@using CMS.CustomTables;
+@using CMS.SiteProvider;
+@using CMS.Helpers;
 
 @model MedioClinic.Models.PageViewModel<ArticleDetailViewModel>
 
@@ -16,7 +19,7 @@
         <div class="row">
 
             @*Article*@
-            <div class="col l9 m8 s12">
+            <div class="col l9 m8 s12" style="padding-right: 4ex;">
                 <p class="title">@Model.Data.Article.Title</p>
                 @Model.Data.Article.DatePublished.ToString("f")
                 <hr />
@@ -36,8 +39,55 @@
             </div>
 
             @*Ads*@
-            <div class="col l3 m4 s12" style="background-color: aqua;">
-                Test Article Ads
+            <div class="col l3 m4 s12">
+
+                <div class="container" style="text-align: center;">
+                    <h5>Our Partners</h5>
+                    <hr />
+                </div>
+
+                @{
+                    // Cache Custom Table Data
+                    List<CustomTableItem> customTable = CacheHelper.Cache(cs =>
+                    {
+
+                        List<CustomTableItem> data = CustomTableItemProvider.GetItems("MedioClinic.Partners").TopN(10).OrderByDescending("ItemCreatedWhen").ToList();
+
+                        if (data != null && cs.Cached)
+                        {
+                            cs.CacheDependency = CacheHelper.GetCacheDependency("customtableitem|medioclinic.partners|all");
+                        }
+
+                        return data;
+
+                    }, new CacheSettings(10, string.Format("MedioClinic_GetPartners()|{0}", SiteContext.CurrentSiteName)));
+
+
+                    Random rnd = new Random();
+
+                    int r = rnd.Next(customTable.Count);
+
+                    var partner = customTable[r];
+                }
+
+                @if (partner != null)
+                {
+                    <div class="card sticky-action">
+                        <div class="card-image waves-effect waves-block waves-light">
+                            <img class="activator" src="@Url.KenticoImageUrl(partner.GetValue("Image").ToString())">
+                        </div>
+                        <div class="card-content" style="padding: 0;">
+                            <span class="card-title activator grey-text text-darken-4">@partner.GetValue("Title")<i class="material-icons right">more_vert</i></span>
+                        </div>
+                        <div class="card-action" style="font-size: 14px; padding: 8px 24px;">
+                            <a href="@partner.GetValue("Website")" target="_blank">Visit our site</a>
+                        </div>
+                        <div class="card-reveal">
+                            <span class="card-title grey-text text-darken-4" style="border-bottom: 1px solid rgba(160,160,160,.2);">@partner.GetValue("Title")<i class="material-icons right">close</i></span>
+                            <p>@partner.GetValue("Summary")</p>
+                        </div>
+                    </div>
+                }
             </div>
         </div>
     </div>
