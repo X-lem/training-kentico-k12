@@ -20,21 +20,29 @@
 
             @*Article*@
             <div class="col l9 m8 s12" style="padding-right: 4ex;">
+
+                @{
+                    var thumbnail = Model.Data.Article.Thumbnail;
+                    string imgPath = string.Empty;
+
+                    if (thumbnail != null)
+                    {
+                        imgPath = Url.KenticoImageUrl(thumbnail.GetPath());
+                    }
+                }
+
                 <p class="title">@Model.Data.Article.Title</p>
                 @Model.Data.Article.DatePublished.ToString("f")
                 <hr />
+                <img src="@imgPath" style="max-width: 400px;" />
 
                 <p>@Html.Raw(Model.Data.Article.Content)</p>
+                <hr />
 
                 @* Authors *@
-                @{
-                    string[] authors = Model.Data.Article.Authors.Split('|');
-                }
-
-                <hr />
-                @foreach (var author in authors)
+                @foreach (var author in Model.Data.Authors)
                 {
-                    <p>@author</p>
+                    <p>@author.GetStringValue("FirstName", string.Empty) @author.GetStringValue("LastName", string.Empty)</p>
                 }
             </div>
 
@@ -46,31 +54,7 @@
                     <hr />
                 </div>
 
-                @{
-                    // Cache Custom Table Data
-                    List<CustomTableItem> customTable = CacheHelper.Cache(cs =>
-                    {
-
-                        List<CustomTableItem> data = CustomTableItemProvider.GetItems("MedioClinic.Partners").TopN(10).OrderByDescending("ItemCreatedWhen").ToList();
-
-                        if (data != null && cs.Cached)
-                        {
-                            cs.CacheDependency = CacheHelper.GetCacheDependency("customtableitem|medioclinic.partners|all");
-                        }
-
-                        return data;
-
-                    }, new CacheSettings(10, string.Format("MedioClinic_GetPartners()|{0}", SiteContext.CurrentSiteName)));
-
-
-                    Random rnd = new Random();
-
-                    int r = rnd.Next(customTable.Count);
-
-                    var partner = customTable[r];
-                }
-
-                @if (partner != null)
+                @foreach(var partner in @Model.Data.CalloutAds)
                 {
                     <div class="card sticky-action">
                         <div class="card-image waves-effect waves-block waves-light">
@@ -79,7 +63,7 @@
                         <div class="card-content" style="padding: 0;">
                             <span class="card-title activator grey-text text-darken-4">@partner.GetValue("Title")<i class="material-icons right">more_vert</i></span>
                         </div>
-                        <div class="card-action" style="font-size: 14px; padding: 8px 24px;">
+                        <div class="card-action" style="font-size: 14px; padding: 8px 15px;">
                             <a href="@partner.GetValue("Website")" target="_blank">Visit our site</a>
                         </div>
                         <div class="card-reveal">

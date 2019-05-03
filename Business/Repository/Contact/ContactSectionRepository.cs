@@ -23,7 +23,6 @@ namespace Business.Repository.Contact
                     Header = m.Title,
                     Subheader = m.Subtitle,
                     Text = m.Text,
-
                 })
                 .FirstOrDefault();
         }

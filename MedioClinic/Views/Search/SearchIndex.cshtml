@@ -59,7 +59,7 @@ else
 
 @helper PrintSchool(TreeNode node)
 {
-    <strong>School <a href="@DocumentURLProvider.GetAbsoluteLiveSiteURL(node).ToLower()">@node.GetStringValue("SchoolName", string.Empty)</a></strong>
+    <strong>School: <a href="@DocumentURLProvider.GetAbsoluteLiveSiteURL(node).ToLower()">@node.GetStringValue("SchoolName", string.Empty)</a></strong>
     <p>@Html.Raw(node.GetStringValue("Bio", string.Empty))</p>
 }
 

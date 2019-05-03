@@ -9,7 +9,6 @@ namespace MedioClinic.Controllers
 {
     public class ContactController : BaseController
     {
-
         private IContactSectionRepository ContactSectionRepository { get; }
         private IMapRepository MapRepository { get; }
         private IMediaLibraryService MediaLibraryService { get; }

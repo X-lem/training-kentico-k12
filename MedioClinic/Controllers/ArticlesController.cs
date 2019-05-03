@@ -1,11 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using System.Web.UI;
 using Business.DependencyInjection;
 using Business.Dto.Articles;
 using Business.Repository.Article;
 using Business.Services.Cache;
+using CMS.CustomTables;
 using CMS.DocumentEngine.Types.MedioClinic;
+using CMS.Helpers;
+using CMS.SiteProvider;
 using MedioClinic.Models.Articles;
 
 namespace MedioClinic.Controllers
@@ -64,10 +69,60 @@ namespace MedioClinic.Controllers
 
             var model = GetPageViewModel(new ArticleDetailViewModel()
             {
-                Article = article
+                Article = article,
+                Authors = GetAuthors(article.Authors),
+                CalloutAds = GetCalloutAds()
             }, article.Title);
 
             return View(model);
+        }
+
+        private List<CustomTableItem> GetAuthors(string authorsId)
+        {
+
+            List<int> authorsIdArray = authorsId.Split('|').Select(int.Parse).ToList();
+            List<CustomTableItem> ArticleAuthors = new List<CustomTableItem>();
+
+            // Get Authors list
+            List<CustomTableItem> Authors = CacheHelper.Cache(cs =>
+            {
+                List<CustomTableItem> data = CustomTableItemProvider.GetItems("MedioClinic.Authors").ToList();
+
+                if (data != null && cs.Cached)
+                {
+                    cs.CacheDependency = CacheHelper.GetCacheDependency("customtableitem|medioclinic.authors|all");
+                }
+
+                return data;
+
+            }, new CacheSettings(10, string.Format("MedioClinic_GetAuthors()|{0}", SiteContext.CurrentSiteName)));
+
+            foreach (var item in Authors)
+            {
+                if (authorsIdArray.Contains(item.GetIntegerValue("ItemId", -1)))
+                    ArticleAuthors.Add(item);
+            }
+
+            return ArticleAuthors;
+        }
+
+        private List<CustomTableItem> GetCalloutAds()
+        {
+            // Cache Custom Table Data
+            List<CustomTableItem> callouts = CacheHelper.Cache(cs =>
+            {
+                List<CustomTableItem> data = CustomTableItemProvider.GetItems("MedioClinic.Partners").TopN(3).OrderByDescending("ItemCreatedWhen").ToList();
+
+                if (data != null && cs.Cached)
+                {
+                    cs.CacheDependency = CacheHelper.GetCacheDependency("customtableitem|medioclinic.partners|all");
+                }
+
+                return data;
+
+            }, new CacheSettings(10, string.Format("MedioClinic_GetPartners()|{0}", SiteContext.CurrentSiteName)));
+
+            return callouts;
         }
     }
 }
