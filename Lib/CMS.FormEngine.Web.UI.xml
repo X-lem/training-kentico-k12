@@ -990,6 +990,7 @@
             </summary>
             <param name="ffi">Form field info</param>
             <param name="form">Form where the control is used.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="ffi"/> or <paramref name="form"/> is <c>null</c></exception>
         </member>
         <member name="M:CMS.FormEngine.Web.UI.FieldActions.CreateChildControls">
             <summary>

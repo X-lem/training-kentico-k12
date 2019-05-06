@@ -1902,11 +1902,27 @@
             <param name="taskId">Task identifier</param>
             <param name="isRunning">Flag indicating that task is being processed</param>
         </member>
+        <member name="M:CMS.Synchronization.IntegrationSynchronizationInfoProvider.SetIntegrationSynchronizationRunning(System.Int32,System.Int32)">
+            <summary>
+            Sets a flag indicating that task is being processed.
+            </summary>
+            <param name="connectorId">Connector identifier</param>
+            <param name="taskId">Task identifier</param>
+            <returns>Returns true when <see cref="P:CMS.Synchronization.IntegrationSynchronizationInfo.SynchronizationIsRunning"/> was successfully set to true.</returns>
+        </member>
         <member name="M:CMS.Synchronization.IntegrationSynchronizationInfoProvider.DeleteInfo(CMS.Synchronization.IntegrationSynchronizationInfo)">
             <summary>
             Deletes the object to the database.
             </summary>
             <param name="info">Object to delete</param>
+        </member>
+        <member name="M:CMS.Synchronization.IntegrationSynchronizationInfoProvider.SetIntegrationSynchronizationRunningInternal(System.Int32,System.Int32)">
+            <summary>
+            Sets a flag indicating that task is being processed.
+            </summary>
+            <param name="connectorId">Connector identifier</param>
+            <param name="taskId">Task identifier</param>
+            <returns>Returns true when <see cref="P:CMS.Synchronization.IntegrationSynchronizationInfo.SynchronizationIsRunning"/> was successfully set to true.</returns>
         </member>
         <member name="T:CMS.Synchronization.IntegrationSyncLogInfo">
             <summary>

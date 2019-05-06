@@ -22032,6 +22032,11 @@
             When the referenced object does not exist, <c>null</c> or <paramref name="replacement"/> is stored to the FK column. 
             </summary>
         </member>
+        <member name="M:CMS.Ecommerce.SKUTreeNode.ClearSKU">
+            <summary>
+            Clears SKU property without reseting NodeSKUID.
+            </summary>
+        </member>
         <member name="T:CMS.Ecommerce.DefaultSettingService">
             <summary>
             Default implementation of <see cref="T:CMS.Ecommerce.ISettingService"/> interface.
