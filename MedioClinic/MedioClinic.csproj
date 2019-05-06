@@ -701,6 +701,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="App_Data\Global\Resources\MedioClinic.resx" />
     <EmbeddedResource Include="CMSResources\CMS.resx" />
     <EmbeddedResource Include="CMSResources\Hotfix.resx" />
   </ItemGroup>

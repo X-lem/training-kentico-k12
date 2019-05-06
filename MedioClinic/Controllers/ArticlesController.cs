@@ -80,7 +80,7 @@ namespace MedioClinic.Controllers
         private List<CustomTableItem> GetAuthors(string authorsId)
         {
 
-            List<int> authorsIdArray = authorsId.Split('|').Select(int.Parse).ToList();
+            List<int> authorsIdArray = new List<int>(Array.ConvertAll(authorsId.Split('|'), int.Parse));
             List<CustomTableItem> ArticleAuthors = new List<CustomTableItem>();
 
             // Get Authors list
