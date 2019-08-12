@@ -8,10 +8,10 @@ using Kentico.Forms.Web.Mvc;
 using MedioClinic.Models.FormComponents;
 
 [assembly: RegisterFormComponent(
-    MediaLibrarySelectionComponent.Identifier, 
-    typeof(MediaLibrarySelectionComponent), 
-    "{$FormComponent.MediaLibrarySelection.Name$}", 
-    Description = "{$FormComponent.MediaLibrarySelection.Description$}", 
+    MediaLibrarySelectionComponent.Identifier,
+    typeof(MediaLibrarySelectionComponent),
+    "{$FormComponent.MediaLibrarySelection.Name$}",
+    Description = "{$FormComponent.MediaLibrarySelection.Description$}",
     IconClass = "icon-menu")]
 
 namespace MedioClinic.Models.FormComponents
@@ -20,7 +20,7 @@ namespace MedioClinic.Models.FormComponents
     {
         public const string Identifier = "MedioClinic.FormComponent.MediaLibrarySelection";
 
-        protected override IEnumerable<SelectListItem> GetItems() => 
+        protected override IEnumerable<SelectListItem> GetItems() =>
             MediaLibraryInfoProvider
                 .GetMediaLibraries()
                 .WhereEquals("LibrarySiteID", SiteContext.CurrentSiteID)

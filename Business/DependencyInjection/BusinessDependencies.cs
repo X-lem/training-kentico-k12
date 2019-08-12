@@ -1,9 +1,11 @@
 ﻿using Business.Repository.Company;
-using Business.Repository.Culture;
 using Business.Repository.Menu;
 using Business.Repository.Social;
 using Business.Services.Cache;
 using Business.Services.Context;
+using Business.Services.Culture;
+using Business.Services.Errors;
+using Business.Services.Localization;
 
 namespace Business.DependencyInjection
 {
@@ -11,26 +13,32 @@ namespace Business.DependencyInjection
     {
         public IMenuRepository MenuRepository { get; }
         public ICompanyRepository CompanyRepository { get; }
-        public ICultureRepository CultureRepository { get; }
+        public ICultureService CultureService { get; }
         public ISiteContextService SiteContextService { get; }
         public ISocialLinkRepository SocialLinkRepository { get; }
         public ICacheService CacheService { get; }
+        public IErrorHelperService ErrorHelperService { get; set; }
+        public ILocalizationService LocalizationService { get; set; }
 
         public BusinessDependencies(
             IMenuRepository menuRepository,
             ICompanyRepository companyRepository,
-            ICultureRepository cultureRepository,
+            ICultureService cultureService,
             ISiteContextService siteContextService,
             ISocialLinkRepository socialLinkRepository,
-            ICacheService cacheDependencyService
+            ICacheService cacheDependencyService,
+            IErrorHelperService errorHelperService,
+            ILocalizationService localizationService
             )
         {
             MenuRepository = menuRepository;
             CompanyRepository = companyRepository;
-            CultureRepository = cultureRepository;
+            CultureService = cultureService;
             SiteContextService = siteContextService;
             SocialLinkRepository = socialLinkRepository;
             CacheService = cacheDependencyService;
+            ErrorHelperService = errorHelperService;
+            LocalizationService = localizationService;
         }
     }
 }

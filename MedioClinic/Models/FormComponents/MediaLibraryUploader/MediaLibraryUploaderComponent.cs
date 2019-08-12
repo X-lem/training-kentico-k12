@@ -3,10 +3,10 @@ using Kentico.Forms.Web.Mvc;
 using MedioClinic.Models.FormComponents;
 
 [assembly: RegisterFormComponent(
-    "MedioClinic.FormComponent.MediaLibraryUploader", 
-    typeof(MediaLibraryUploaderComponent), 
-    "{$FormComponent.MediaLibraryUploader.Name$}", 
-    Description = "{$FormComponent.MediaLibraryUploader.Description$}", 
+    "MedioClinic.FormComponent.MediaLibraryUploader",
+    typeof(MediaLibraryUploaderComponent),
+    "{$FormComponent.MediaLibraryUploader.Name$}",
+    Description = "{$FormComponent.MediaLibraryUploader.Description$}",
     IconClass = "icon-picture")]
 
 namespace MedioClinic.Models.FormComponents

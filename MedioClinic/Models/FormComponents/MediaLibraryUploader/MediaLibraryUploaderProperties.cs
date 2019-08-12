@@ -14,9 +14,9 @@ namespace MedioClinic.Models.FormComponents
         [DefaultValueEditingComponent(TextInputComponent.IDENTIFIER)]
         public override string DefaultValue { get; set; } = string.Empty;
 
-        [EditingComponent(MediaLibrarySelectionComponent.Identifier, 
-            Label = "{$FormComponent.MediaLibraryUploader.MediaLibraryId.Name$}", 
-            Tooltip = "{$FormComponent.MediaLibraryUploader.MediaLibraryId.Tooltip$}", 
+        [EditingComponent(MediaLibrarySelectionComponent.Identifier,
+            Label = "{$FormComponent.MediaLibraryUploader.MediaLibraryId.Name$}",
+            Tooltip = "{$FormComponent.MediaLibraryUploader.MediaLibraryId.Tooltip$}",
             ExplanationText = "{$FormComponent.MediaLibraryUploader.MediaLibraryId.ExplanationText$}")]
         [Required]
         public string MediaLibraryId { get; set; }

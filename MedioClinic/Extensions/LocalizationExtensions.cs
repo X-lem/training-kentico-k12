@@ -1,5 +1,4 @@
-﻿
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using CMS.Helpers;
 
 namespace MedioClinic.Extensions
