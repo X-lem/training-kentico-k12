@@ -56,7 +56,20 @@
                     }
                 </ul>
             }
-
+            @if (Context.User.Identity.IsAuthenticated)
+            {
+                <ul id="user-account" class="dropdown-content">
+                    <li><a href="@Url.Action("Index", "Profile")">Profile</a></li>
+                    <li><a href="@Url.Action("Signout", "Account")">Sign out</a></li>
+                </ul>
+            }
+            else
+            {
+                <ul id="user-account" class="dropdown-content">
+                    <li><a href="@Url.Action("Register", "Account")">Register</a></li>
+                    <li><a href="@Url.Action("Signin", "Account")">Sign in</a></li>
+                </ul>
+            }
             <ul class="right hide-on-med-and-down">
                 @foreach (var menuItem in Model.MenuItems)
                 {
@@ -73,16 +86,27 @@
                         </li>
                     }
                 }
-
+                @* Culture *@
                 <li>
                     <a class="dropdown-trigger" href="#" data-target="langs">
                         @Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName
                         <i class="fas fa-globe-africa right"></i>
                     </a>
                 </li>
+                @* Search *@
                 <li>
                     <a onclick="toggle_visibility('searchBar')">
                         <img alt="Search" width="24" style="vertical-align: middle;" src="~/App_Themes/Default/Images/DocumentTypeIcons/search-icon.png" />
+                    </a>
+                </li>
+                @* Login *@
+                <li>
+                    <a class="dropdown-trigger" href="#" data-target="user-account">
+                        @if (Context.User.Identity.IsAuthenticated)
+                        {
+                            @Html.Raw(User.Identity.Name)
+                        }
+                        <i class="fas fa-user-circle right"></i>
                     </a>
                 </li>
             </ul>
@@ -106,7 +130,7 @@
             </ul>
             <a href="#" data-target="nav-mobile" class="sidenav-trigger">
                 <i class="material-icons">menu</i>
-            </a>            
+            </a>
         </div>
     </nav>
 

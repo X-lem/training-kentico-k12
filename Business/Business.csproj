@@ -261,6 +261,9 @@
     <Reference Include="DotNetOpenAuth, Version=4.0.0.11165, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
       <HintPath>..\packages\Kentico.Libraries.12.0.34\lib\net461\DotNetOpenAuth.dll</HintPath>
     </Reference>
+    <Reference Include="Enums.NET, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7ea1c1650d506225, processorArchitecture=MSIL">
+      <HintPath>..\packages\Enums.NET.2.3.2\lib\net45\Enums.NET.dll</HintPath>
+    </Reference>
     <Reference Include="Facebook, Version=6.0.10.0, Culture=neutral, PublicKeyToken=58cb4f2111d1e6de, processorArchitecture=MSIL">
       <HintPath>..\packages\Facebook.6.4.2\lib\net45\Facebook.dll</HintPath>
     </Reference>
@@ -439,6 +442,7 @@
       <HintPath>..\packages\Kentico.Libraries.12.0.34\lib\net461\PreMailer.Net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.HashFunction.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=80c9288e394c1322, processorArchitecture=MSIL">
@@ -586,6 +590,19 @@
     <Compile Include="Generated\Pages\SocialLinkProvider.generated.cs" />
     <Compile Include="Generated\Pages\SocialLinksFolder.generated.cs" />
     <Compile Include="Generated\Pages\SocialLinksFolderProvider.generated.cs" />
+    <Compile Include="Identity\Extensions\UserExtensions.cs" />
+    <Compile Include="Identity\IMedioClinicSignInManager.cs" />
+    <Compile Include="Identity\IMedioClinicUserManager.cs" />
+    <Compile Include="Identity\IMedioClinicUserStore.cs" />
+    <Compile Include="Identity\MedioClinicSignInManager.cs" />
+    <Compile Include="Identity\MedioClinicUserManager.cs" />
+    <Compile Include="Identity\MedioClinicUserStore.cs" />
+    <Compile Include="Identity\Models\Gender.cs" />
+    <Compile Include="Identity\Models\MedioClinicUser.cs" />
+    <Compile Include="Identity\Helpers\UserHelper.cs" />
+    <Compile Include="Identity\Models\Roles.cs" />
+    <Compile Include="Identity\Proxies\IKenticoUserStore.cs" />
+    <Compile Include="Identity\Proxies\KenticoUserStore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\Article\ArticleRepository.cs" />
     <Compile Include="Repository\Article\ArticleSectionRepository.cs" />
@@ -626,9 +643,15 @@
     <Compile Include="Services\Cache\CacheService.cs" />
     <Compile Include="Services\Cache\ICacheService.cs" />
     <Compile Include="Services\Context\ISiteContextService.cs" />
+    <Compile Include="Services\Errors\ErrorHelperService.cs" />
+    <Compile Include="Services\Errors\IErrorHelperService.cs" />
     <Compile Include="Services\IService.cs" />
+    <Compile Include="Services\Localization\ILocalizationService.cs" />
+    <Compile Include="Services\Localization\LocalizationService.cs" />
     <Compile Include="Services\MediaLibrary\IMediaLibraryService.cs" />
     <Compile Include="Services\MediaLibrary\MediaLibraryService.cs" />
+    <Compile Include="Services\Model\IUserModelService.cs" />
+    <Compile Include="Services\Model\UserModelService.cs" />
     <Compile Include="Services\Query\DocumentQueryService.cs" />
     <Compile Include="Services\Query\IDocumentQueryService.cs" />
   </ItemGroup>

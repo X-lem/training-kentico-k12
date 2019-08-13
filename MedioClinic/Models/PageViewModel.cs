@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+
 using Business.Dto.Company;
 using Business.Dto.Culture;
 using Business.Dto.Menu;
@@ -18,6 +19,7 @@ namespace MedioClinic.Models
         public CompanyDto Company { get; set; }
         public IEnumerable<CultureDto> Cultures { get; set; }
         public IEnumerable<SocialLinkDto> SocialLinks { get; set; }
+        public UserMessage UserMessage { get; set; }
     }
 
     public class PageViewModel<TViewModel> : PageViewModel where TViewModel : IViewModel

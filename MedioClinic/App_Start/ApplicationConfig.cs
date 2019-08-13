@@ -1,6 +1,10 @@
+using System.Web.Mvc;
+
 using Kentico.Content.Web.Mvc;
-using Kentico.PageBuilder.Web.Mvc;
 using Kentico.Web.Mvc;
+
+using MedioClinic.Attributes;
+using MedioClinic.Utils;
 
 namespace MedioClinic
 {
@@ -9,14 +13,8 @@ namespace MedioClinic
         public static void RegisterFeatures(IApplicationBuilder builder)
         {
             // Enable required Kentico features
-
             builder.UsePreview();
-
-            builder.UsePageBuilder(new PageBuilderOptions()
-            {
-                DefaultSectionIdentifier = "MedioClinic.Section.SingleColumn",
-                RegisterDefaultSection = true
-            });
+            builder.UseDataAnnotationsLocalization();
         }
     }
 }
